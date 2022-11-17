@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ProDom.MobileClient.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ProDom.MobileClient.Welcome"
+    xmlns:views="clr-namespace:ProDom.MobileClient.Session"
+    xmlns:chats="clr-namespace:ProDom.MobileClient.Chats"
+    xmlns:help="clr-namespace:ProDom.MobileClient.Pages.HelpPages"
+    FlyoutBehavior="Disabled">
+
+    <ShellContent
+        x:Name="Authorize"
+                ContentTemplate="{DataTemplate local:AuthorizePage}"
+                Route="AuthorizePage" />
+
+
+    <!-- Session UI -->
+
+
+    <TabBar
+        x:Name="session"
+        Route="session">
+
+        <ShellContent
+                x:Name="tabNews"
+                Title="Главная"
+                Icon="tabbar_home.png"
+                ContentTemplate="{DataTemplate views:NewsPage}"
+                Route="NewsPage" />
+
+        <Tab
+            Icon="tabbar_chats.png"
+            Title="Чаты">
+            <ShellContent
+                x:Name="tabChatsPrivate"
+                Title="Личные"
+                Icon="ChatsPage/chat"
+                ContentTemplate="{DataTemplate chats:ChatsPrivatePage}"
+                Route="private"/>
+
+            <ShellContent
+                x:Name="tabChatEnterance"
+                Title="Подъезд"
+                Icon="enterance.png"
+                ContentTemplate="{DataTemplate chats:ChatsEnterancePage}"/>
+
+            <ShellContent
+                x:Name="tabChatHouse"
+                Title="Дом"
+                Icon="Images/ChatsPage/house.svg"
+                ContentTemplate="{DataTemplate chats:ChatHousePage}"/>
+
+        </Tab>
+
+
+        <ShellContent
+                x:Name="tabProfile"
+                Title="Профиль"
+                Icon="tabbar_profile.png"
+                ContentTemplate="{DataTemplate views:ProfilePage}"
+                Route="profile" />
+        
+        <ShellContent
+                x:Name="tabSettings"
+                Title="Настройки"
+                Icon="tabbar_settings.svg"
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="settings" />
+
+    </TabBar>
+
+
+
+
+
+
+</Shell>

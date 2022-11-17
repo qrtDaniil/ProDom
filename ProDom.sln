@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProDom.MobileClient", "ProDom.MobileClient\ProDom.MobileClient.csproj", "{310A6993-9325-49CD-93AA-30078E0AB97E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProDom.ApiServer", "ProDom.ApiServer\ProDom.ApiServer.csproj", "{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310A6993-9325-49CD-93AA-30078E0AB97E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16999390-B6D2-4C3C-AE18-A486D9F52196}
+	EndGlobalSection
+EndGlobal

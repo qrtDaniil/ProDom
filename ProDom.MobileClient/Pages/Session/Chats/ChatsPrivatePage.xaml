@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Chats.ChatsPrivatePage"
+             Shell.TabBarBackgroundColor="#ac88ec">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout>
+            <Label 
+                Text="Чаты"
+                TextColor="White"
+                FontSize="18"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                Margin="15,0,0,0"
+                />
+            
+            <ImageButton 
+                Source="button_new_message.svg"
+                WidthRequest="50"
+                HeightRequest="50"
+                Margin="150,0,0,0"
+                Clicked="ImageButton_Clicked"/>
+        </HorizontalStackLayout>
+
+    </Shell.TitleView>
+
+    <Grid>
+
+        <VerticalStackLayout
+            x:Name="layNoMessages"
+            IsVisible="true"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Image
+                Margin="0,50,0,0"
+                Source="dotnet_bot"/>
+
+            <Label 
+                Text="Пока нет диалогов :("
+                FontSize="20"
+                />
+
+        </VerticalStackLayout>
+        <ListView
+            SeparatorVisibility="None"
+            Grid.Row="0"
+            Grid.Column="0"
+            ItemsSource="{Binding usersWithMessages}"
+            HasUnevenRows ="True"
+            x:Name="layMessages"
+            IsVisible="false"
+            ZIndex="1"
+            ItemSelected="layMessages_ItemSelected">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            x:Name="grid"
+                            Padding="20,10,20,10">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#848ff4" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                                Margin="0,0,10,0"
+                                Grid.RowSpan="2"
+                                Stroke="#AAAAAA"
+                                StrokeThickness="1"
+                                Padding="0"
+                                WidthRequest="60">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="100" />
+                                </Border.StrokeShape>
+                                <Image
+                                    Source="{Binding imageResource, TargetNullValue={StaticResource fallbackImageUrl}}"
+                                    Aspect="Fill"
+                                    WidthRequest="60"
+                                    HeightRequest="60"/>
+                            </Border>
+                            <Label
+                                Grid.Column="1"
+                                FontSize="16"
+                                TextColor="White"
+                                Text="{Binding userName}"/>
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                TextColor="White"
+                                FontSize="14"
+                                Margin="0,10,0,0"
+                                Text="{Binding lastMessage}"/>
+                            <Label
+                                Grid.Column="3"
+                                Grid.Row="0"
+                                TextColor="White"
+                                
+                                FontSize="10"
+                                HorizontalOptions="End"
+                                Text="{Binding timeBeforelastMessage}"/>
+                            <Image
+                                Grid.Column="4"
+                                Grid.Row="1"
+                                HorizontalOptions="End"
+                                Source="{Binding statusImageResouce, TargetNullValue={StaticResource fallbackImageUrl}}"
+                                Aspect="AspectFill"
+                                Margin="0,1,15,0"
+                                WidthRequest="18"
+                                HeightRequest="18"
+                                
+                                ZIndex="0"/>
+                            <Label
+                                Grid.Column="4"
+                                Grid.Row="1"
+                                TextColor="#000000"
+                                Padding="5,5,20,5"
+                                FontSize="12"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                ZIndex="1"
+                                IsVisible="{Binding notReadedLabelVisibility}"
+                                Text="{Binding notReadedCount}"/>
+                            
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+	</Grid>
+</ContentPage>

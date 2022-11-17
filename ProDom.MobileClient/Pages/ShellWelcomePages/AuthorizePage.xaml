@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Welcome.AuthorizePage"
+             Title="Авторизация"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#B98CE8">
+    <VerticalStackLayout>
+        <Image
+            Margin="0,50,0,0"
+            WidthRequest="150"
+            HeightRequest="40"
+            Aspect="Fill"
+            Source="authorize_title.svg" 
+            HorizontalOptions="Center" />
+
+        <Image
+            Margin="0,40"
+            WidthRequest="250"
+            HeightRequest="200"
+            Aspect="Fill"
+            Source="authorize_image.svg" 
+            HorizontalOptions="Center" />
+
+        <Border
+            Margin="0,10,0,0"
+            WidthRequest="370"
+            HeightRequest="500"
+            Background="#F4F4F4">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout
+                Padding="20,10,20,0">
+                <Label
+                    Margin="0,0,0,20"
+                    Text="Вход"
+                    HorizontalOptions="Center"
+                    FontSize="30"/>
+
+                <Label
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,5"
+                    IsVisible="false"
+                    x:Name="error"
+                    FontSize="12"
+                    ZIndex="999"
+                    Text="Неверный логин или пароль"
+                    FontAttributes="Bold"
+                    TextColor="Red"/>
+
+                <Label
+                    Margin="45,0,0,0"
+                    FontSize="12"
+                    Text="Номер телефона"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Keyboard="Telephone"
+                        Margin="10,0,0,0"
+                        x:Name="number"
+                        Placeholder="+7 (XXX) XXX-XX-XX"/>
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Пароль"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Margin="10,0,0,0"
+                        x:Name="password"
+                        IsPassword="True"
+                        Placeholder="**********"/>
+                </Border>
+                <Button
+                    x:Name="btnForgotPassword"
+                    Clicked="btnForgotPassword_Clicked"
+                    Padding="0"
+                    Margin="0,0,45,10"
+                    BackgroundColor="#F4F4F4"
+                    HeightRequest="25"
+                    WidthRequest="100"
+                    HorizontalOptions="End"
+                    Text="Забыли пароль?"
+                    FontSize="12"
+                    TextColor="Black"/>
+                <Border
+                    HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    
+                    <Button
+                        x:Name="btnAuthorize"
+                        Clicked="btnAuthorize_Clicked"
+                        WidthRequest="150"
+                        BackgroundColor="#B98CE8"
+                        Text="Вход"/>
+
+                </Border>
+
+                <HorizontalStackLayout
+                    Margin="65,15">
+                    <Label
+                        FontSize="12"
+                        TextColor="#6f6f6f"
+                        Text="Еще нет аккаунта?"/>
+                    <Button
+                        x:Name="btnRegister"
+                        Padding="0"
+                        Margin="0,0,45,10"
+                        BackgroundColor="#F4F4F4"
+                        HeightRequest="17"
+                        WidthRequest="100"
+                        Clicked="btnRegister_Clicked"
+                        Text="Создать новый"
+                        FontSize="12"
+                        TextColor="Black"/>
+                    
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

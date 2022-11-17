@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Session.ProfilePage"
+             IconImageSource="profile.png"
+             Title="Профиль"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout
+        Margin="10,10">
+        <Label 
+            Text="Мой профиль"
+            Margin="0,15,0,0"
+            TextColor="#737373"
+            FontSize="24"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Border
+            Margin="0,20,0,0"
+            WidthRequest="250"
+            HeightRequest="200"
+            Background="#F1F1F1">
+            
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+            <Grid>
+                <Image
+                    Aspect="AspectFit"
+                    Source="profile.png"/>
+
+                <ImageButton
+                    Source="profile_edit_icon.svg"
+                    WidthRequest="25"
+                    HeightRequest="25"
+                    Margin="0,0,10,10"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"/>
+            </Grid>
+        </Border>
+
+        <Label
+            x:Name="lbName"
+            Margin="0,10"
+            Text="Name Surname"
+            HorizontalOptions="Center"
+            FontSize="18"/>
+
+        <Label
+                Margin="30,10,0,0"
+                FontSize="12"
+                Text="Телефон"
+                TextColor="#6f6f6f"/>
+        <Border
+            
+                HorizontalOptions="Center"
+                Margin="10,2,0,0"
+                Background="#F1F1F1"
+                WidthRequest="300">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <Entry
+                HeightRequest="40"
+                IsEnabled="False"
+                x:Name="phone"
+                Margin="10,0,0,0"
+                Text="+79999999999"
+                FontSize="16"
+                TextColor="#545454"/>
+        </Border>
+
+        <Label
+                Margin="30,10,0,0"
+                FontSize="12"
+                Text="Адрес"
+                TextColor="#6f6f6f"/>
+        <Border
+            
+                HorizontalOptions="Center"
+                Margin="10,2,0,0"
+                Background="#F1F1F1"
+                WidthRequest="300">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <Label
+                x:Name="lbAdress"
+                Margin="10,5,5,5"
+                Text="ул. ******** д. *** кв. ***"
+                FontSize="16"
+                TextColor="#545454"/>
+        </Border>
+
+        <Label
+            Margin="10,15,0,0"
+            Text="Моя семья"
+            FontSize="20"
+            TextColor="#737373"/>
+
+        <HorizontalStackLayout
+            Margin="0,10,0,0">
+            <ScrollView
+                HorizontalScrollBarVisibility="Default">
+                <Border
+                    Padding="5"
+                    WidthRequest="125"
+                    Background="#F4F4F4"
+                    Stroke="#F4F4F4">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+
+                        HorizontalOptions="Center">
+
+                        <ImageButton
+                            x:Name="profile"
+                            HorizontalOptions="Center"
+                            Source="profile.png"
+                            WidthRequest="90"
+                            HeightRequest="90"
+                            Aspect="AspectFill"/>   
+
+                        <Label
+                            Margin="3"
+                            FontSize="12"
+                            Text="Name Surname"
+                            HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </ScrollView>            
+        </HorizontalStackLayout>
+        <Button
+            x:Name="btnEdit"
+            Margin="0,10,0,0"
+            WidthRequest="250"
+            BackgroundColor="#B98CE8"
+            Clicked="Edit_Clicked"
+            Text="Редактировать профиль"/>
+
+    </VerticalStackLayout>
+</ContentPage>

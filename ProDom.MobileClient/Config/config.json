@@ -1,0 +1,13 @@
+
+    {
+        "Application": {
+            "NotificationHouseChat" : "ENABLED",
+            "NotificationEnterence" : "ENABLED",
+            "CurrentAppTheme" : "LIGHT"
+            },
+
+        "UserActive": {
+            "isAuthorized" : false,
+            "API" : "-"
+            }
+    }

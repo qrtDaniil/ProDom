@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Welcome.PhoneVerifyPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#B98CE8">
+    <VerticalStackLayout
+       Margin="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <ImageButton
+                Grid.Column="0"
+                VerticalOptions="Center"
+                WidthRequest="50"
+                HeightRequest="50"
+                Aspect="AspectFill"
+                Clicked="ImageButton_Clicked"
+                Source="chat_header_backbutton.svg"/>
+            <Image
+                Grid.Column="1"
+                Margin="0,10,0,10"
+                WidthRequest="100"
+                HeightRequest="100"
+                Aspect="Fill"
+                Source="registrer_phone_image.png" 
+                />
+        </Grid>
+        <Border
+            Margin="0,10,0,0"
+            WidthRequest="370"
+            HeightRequest="700"
+            Background="#F4F4F4">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout
+                Padding="20,10,20,0">
+                
+                <Label
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,5"
+                    IsVisible="false"
+                    x:Name="error"
+                    FontSize="12"
+                    Text="Код введен неверно"
+                    FontAttributes="Bold"
+                    TextColor="Red"/>
+                
+                <Label
+                    Margin="0,0,0,20"
+                    Text="Введите код из SMS"
+                    HorizontalOptions="Center"
+                    FontSize="30"/>
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Введите код из SMS-сообщения, которое придет на указанный номер"/>
+
+                <HorizontalStackLayout Margin="10,10"
+                                       HorizontalOptions="Center">
+                    <Border
+                    HorizontalOptions="Center"
+                    Margin="0,10"
+                    WidthRequest="70"
+                    HeightRequest="70"
+                    Background="#F1F1F1"
+                        Stroke="#000000">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry
+                        VerticalTextAlignment="Center"
+                        WidthRequest="70"
+                        HeightRequest="70"
+                        MaxLength="1"
+                        HorizontalTextAlignment="Center"
+                        FontSize="40"
+                        Keyboard="Telephone"
+                        Placeholder="-"/>
+                    </Border>
+
+                    <Border
+                    HorizontalOptions="Center"
+                    Margin="0,10"
+                    WidthRequest="70"
+                    HeightRequest="70"
+                    Background="#F1F1F1"
+                        Stroke="#000000">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry
+                        VerticalTextAlignment="Center"
+                        WidthRequest="80"
+                        MaxLength="1"
+                        HorizontalTextAlignment="Center"
+                        FontSize="40"
+                        Keyboard="Telephone"
+                        Placeholder="-"/>
+                    </Border>
+                    
+                    <Border
+                    HorizontalOptions="Center"
+                    Margin="0,10"
+                    WidthRequest="70"
+                    HeightRequest="70"
+                    Background="#F1F1F1"
+                        Stroke="#000000">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry
+                        VerticalTextAlignment="Center"
+                        WidthRequest="80"
+                        MaxLength="1"
+                        HorizontalTextAlignment="Center"
+                        FontSize="40"
+                        Keyboard="Telephone"
+                        Placeholder="-"/>
+                    </Border>
+
+                    <Border
+                    HorizontalOptions="Center"
+                    Margin="0,10"
+                    WidthRequest="70"
+                    HeightRequest="70"
+                    Background="#F1F1F1"
+                        Stroke="#000000">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry
+                        VerticalTextAlignment="Center"
+                        WidthRequest="80"
+                        MaxLength="1"
+                        HorizontalTextAlignment="Center"
+                        FontSize="40"
+                        Keyboard="Telephone"
+                        Placeholder="-"/>
+                    </Border>
+
+                </HorizontalStackLayout>
+
+                <Button
+                    Margin="0,0"
+                        x:Name="btnRegister"
+                        Clicked="btnRegister_Clicked"
+                        WidthRequest="150"
+                        BackgroundColor="#B98CE8"
+                        Text="Далее"/>
+
+                <Image
+                    Source="register_phone_bottom.png"
+                    WidthRequest="200"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

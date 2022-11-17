@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Chats.ChatFormPage"
+             Title="ChatFormPage"
+             Shell.TabBarIsVisible="False"
+             NavigationPage.HasBackButton="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior
+            IconOverride="chat_header_backbutton.svg"/>
+    </Shell.BackButtonBehavior>
+
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="1"
+                Text="Name Surname"
+                FontSize="20"
+                TextColor="White"
+                VerticalOptions="Center"/>
+            
+            <ImageButton
+                Grid.Column="2"
+                x:Name="settingsbutton"
+                Source="chat_header_settings.svg"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,0,15,0"
+                WidthRequest="25"
+                HeightRequest="25"/>
+            
+        </Grid>
+    </Shell.TitleView>
+
+    <AbsoluteLayout>
+        <ScrollView>
+
+        </ScrollView>
+        <Border
+            ZIndex="999"
+            AbsoluteLayout.LayoutBounds="0.5,0.94"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            Stroke="#F4F4F4"
+            WidthRequest="340"
+            Background="#F4F4F4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Editor
+                    MinimumHeightRequest="20"
+                    MaximumHeightRequest="70"
+                    AutoSize="TextChanges"
+                    WidthRequest="260"
+                    HorizontalOptions="Start"
+                    Margin="10,0,0,0"
+                    x:Name="entryMsg"
+                    Placeholder="Введите текст сообщения"/>
+                <ImageButton
+                    Grid.Column="1"
+                    WidthRequest="25"
+                    HeightRequest="25"
+                    VerticalOptions="Center"
+                    Source="chat_sendbutton.svg"
+                    HorizontalOptions="Center"/>
+            </Grid>
+        </Border>
+    </AbsoluteLayout>
+</ContentPage>

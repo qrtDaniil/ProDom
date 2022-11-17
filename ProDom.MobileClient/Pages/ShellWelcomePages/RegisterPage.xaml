@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Welcome.RegisterPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#B98CE8">
+    <VerticalStackLayout
+        Margin="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <ImageButton
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="50"
+                HeightRequest="50"
+                Aspect="AspectFill"
+                Clicked="ImageButton_Clicked"
+                Source="chat_header_backbutton.svg"/>
+            <Image
+                Grid.Column="1"
+                Margin="0,10"
+                WidthRequest="100"
+                HeightRequest="100"
+                Aspect="Fill"
+                Source="register_image.svg" 
+                HorizontalOptions="Center"/>
+        </Grid>
+        <Border
+            Margin="0,10,0,0"
+            WidthRequest="370"
+            HeightRequest="700"
+            Background="#F4F4F4">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout
+                Padding="20,10,20,0">
+                <Label
+                    Margin="0,0,0,20"
+                    Text="Регистрация"
+                    HorizontalOptions="Center"
+                    FontSize="30"/>
+
+                <Label
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,5"
+                    IsVisible="false"
+                    x:Name="error"
+                    FontSize="12"
+                    Text="Не все поля заполнены корректно"
+                    FontAttributes="Bold"
+                    TextColor="Red"/>
+
+                <Label
+                    Margin="45,20,0,0"
+                    FontSize="12"
+                    Text="ФИО"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Keyboard="Default"
+                        Margin="10,0,0,0"
+                        x:Name="name"
+                        Placeholder="Иванов Иван Иванович"/>
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Номер телефона"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Keyboard="Telephone"
+                        Margin="10,0,0,0"
+                        x:Name="number"
+                        Placeholder="+7 (XXX) XXX-XX-XX"/>
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Адрес"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Keyboard="Default"
+                        Margin="10,0,0,0"
+                        x:Name="adress"
+                        Placeholder=""/>
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Пароль"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+
+                    <Entry
+                        IsPassword="True"
+                        Margin="10,0,0,0"
+                        x:Name="password"
+                        Placeholder="*********"/>
+
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Подтверждение пароля"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+
+                    <Entry
+                        IsPassword="True"
+                        Margin="10,0,0,0"
+                        x:Name="passwordConfirm"
+                        Placeholder="*********"/>
+
+                </Border>
+
+                <Button
+                    Margin="0,40"
+                        x:Name="btnRegister"
+                        Clicked="btnRegister_Clicked"
+                        WidthRequest="150"
+                        BackgroundColor="#B98CE8"
+                        Text="Далее"/>
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+</ContentPage>

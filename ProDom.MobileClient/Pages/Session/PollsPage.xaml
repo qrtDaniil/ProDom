@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Session.PollsPage"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout
+        Margin="10,20,10,10">
+        <HorizontalStackLayout>
+            <Border
+            WidthRequest="45"
+            Background="#FFF">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="30"/>
+                </Border.StrokeShape>
+                <ImageButton 
+                WidthRequest="25"
+                HeightRequest="25"
+                Source="btn_back.svg"
+                Clicked="BackButton_Clicked"/>
+            </Border>
+            <Label
+                    Margin='15,0'
+                Text="Опросы"
+                HorizontalOptions="Center"
+                TextColor="#100F0D"
+                FontSize="32"/>
+
+        </HorizontalStackLayout>
+        <Border
+            Margin="0,30,0,0"
+            WidthRequest="250"
+            Background="#F4F4F4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+            <HorizontalStackLayout
+
+                HorizontalOptions="Center"
+                Background="#F4F4F4"
+                Padding="5">
+                <Entry
+                    Placeholder="Поиск"
+                    VerticalOptions="Center"
+                    WidthRequest="210"
+                    />
+                <ImageButton 
+                    Source="search.svg"
+                    Aspect="AspectFill"
+                    WidthRequest="25"
+                    HeightRequest="25"
+                    VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        
+        <ImageButton 
+            Source="poll_create.svg"
+            Margin="0,15"
+            HorizontalOptions="Center"
+            Clicked="ImageButton_Clicked"/>
+
+            <ListView
+                x:Name="lvPolls"
+                Margin="0,30,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Border
+                                Margin="0,10,0,0"
+                                WidthRequest="320"
+                                HeightRequest="170"
+                                Background="#F4F4F4">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image 
+                                        Grid.Column="3"
+                                        Grid.RowSpan="3"
+                                       Source="man.png"
+                                       WidthRequest="100"
+                                       HeightRequest="100"/>
+                                    <Label
+                                        Margin="10,20,0,10"
+                                        FontSize="16"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Text="{Binding name}"
+                                        x:Name="entryName"/>
+                                    <ImageButton
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        Grid.Row="1"
+                                        Source="poll_accept.svg"/>
+                                    <ImageButton
+                                        HorizontalOptions="Start"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Source="poll_denied.svg"
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        Aspect="AspectFill"/>
+                                    <Label
+                                        TextColor="#1F1F1F"
+                                        Margin="20,0,0,7"
+                                        Grid.Row="2"
+                                        FontSize="12"
+                                        VerticalOptions="End"
+                                        Grid.ColumnSpan="2"
+                                        Text="Подробнее"/>
+                                </Grid>
+                            </Border>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+    </VerticalStackLayout>
+</ContentPage>

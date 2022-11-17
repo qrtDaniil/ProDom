@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Pages.Session.AddPollPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <VerticalStackLayout
+        Margin="10,20,10,10">
+        <HorizontalStackLayout
+            Margin="0,0,0,40">
+                <Border
+            WidthRequest="45"
+            Background="#FFF">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30"/>
+                    </Border.StrokeShape>
+                    <ImageButton 
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        Source="btn_back.svg"
+                        Clicked="BackButton_Clicked"/>
+                </Border>
+                <Label
+                    Margin='15,0'
+                Text="Новый опрос"
+                HorizontalOptions="Center"
+                TextColor="#100F0D"
+                FontSize="32"/>
+
+            </HorizontalStackLayout>
+        <VerticalStackLayout
+            Margin="10,0,0,0">
+            <Label
+                Margin="0,0,0,0"
+                FontSize="12"
+                Text="Название"
+                TextColor="#6f6f6f"/>
+            <Border
+                HorizontalOptions="Start"
+                Margin="0,2,0,0"
+                WidthRequest="250"
+                Background="#F1F1F1">
+                
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <Entry
+                    x:Name="pollName"
+                    Placeholder="Введите название"
+                    WidthRequest="230"/>
+            </Border>
+
+            <Label
+                Margin="0,10,0,0"
+                FontSize="12"
+                Text="Описание"
+                TextColor="#6f6f6f"/>
+            <Border
+                HorizontalOptions="Start"
+                Margin="0,2,0,0"
+                WidthRequest="250"
+                Background="#F1F1F1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <Editor
+                    x:Name="pollDescription"
+                    Placeholder="Введите описание (до 250 символов)"
+                    WidthRequest="230"
+                    HeightRequest="100"
+                    MaxLength="250"/>
+            </Border>
+
+            <Label
+                Margin="0,10,0,0"
+                FontSize="12"
+                Text="Дата начала"
+                TextColor="#6f6f6f"/>
+            <Border
+                HorizontalOptions="Start"
+                Margin="0,2,0,0"
+                WidthRequest="110"
+                Background="#F1F1F1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <DatePicker
+                        Margin="87,0,0,0"
+                        Format="d"
+                        x:Name="pollDateStart"
+                        FontSize="12"
+                        TextColor="#1f1f1f"
+                        BackgroundColor="#f1f1f1"
+                        WidthRequest="150"/>
+            </Border>
+
+            <Label
+                Margin="0,10,0,0"
+                FontSize="12"
+                Text="Продолжительность"
+                TextColor="#6f6f6f"/>
+            <Border
+                HorizontalOptions="Start"
+                Margin="0,2,0,0"
+                Background="#F1F1F1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <Picker
+                    x:Name="pollTimeActive"
+                    Margin="15,0,0,0"
+                    Title="Выберите количество дней"/>
+            </Border>
+
+            <Border
+                HorizontalOptions="Center"
+                Margin="0,30,0,0"
+                WidthRequest="220"
+                HeightRequest="150"
+                Background="#F1F1F1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <Button
+                    x:Name="pollImageResource"
+                    Text="Выберите изображение"
+                    FontSize="12"
+                    TextColor="#1f1f1f"
+                    BackgroundColor="#f1f1f1"
+                    WidthRequest="220"/>
+            </Border>
+
+            <Border
+                HorizontalOptions="Center"
+                Margin="0,30,0,0"
+                WidthRequest="150"
+                Background="#B98CE8">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <Button
+                    Clicked="btnCreate_Clicked"
+                    x:Name="btnCreate"
+                    Text="Создать"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#B98CE8"
+                    WidthRequest="150"/>
+            </Border>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
