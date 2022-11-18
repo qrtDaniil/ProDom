@@ -2,12 +2,15 @@
 
 namespace ProDom.ApiServer.Models
 {
-    public class User
+    public class User : BaseModel
     {
         public int Id { get; set; }
 
+        public List<Poll> Polls { get; set; }
+        public List<Appeal> Appeals { get; set; }
+
         public int? PersonalAccountId { get; set; }
-        public PersonalAccount? PersonalAccount { get; set; } = null!;
+        public PersonalAccount? PersonalAccount { get; set; }
 
         public int? RoleId { get; set; }
         public Role? Role { get; set; } = null!;
@@ -23,13 +26,7 @@ namespace ProDom.ApiServer.Models
         [MaxLength(40)]
         public string Password { get; set; }
 
-        public int Points { get; set; }
-
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public User(int id, int? personalAccountId, int? roleId, string fullName, string phoneNumber, byte[]? profilePicture, string password, int points, DateTime createdAt, DateTime updatedAt)
+        public User(int id, int? personalAccountId, int? roleId, string fullName, string phoneNumber, byte[]? profilePicture, string password)
         {
             Id = id;
             PersonalAccountId = personalAccountId;
@@ -38,9 +35,6 @@ namespace ProDom.ApiServer.Models
             PhoneNumber = phoneNumber;
             ProfilePicture = profilePicture;
             Password = password;
-            Points = points;
-            UpdatedAt = DateTime.Now;
-            CreatedAt = DateTime.Now;
         }
     }
 }

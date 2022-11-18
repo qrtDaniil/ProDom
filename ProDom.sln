@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProDom.MobileClient", "ProDom.MobileClient\ProDom.MobileClient.csproj", "{310A6993-9325-49CD-93AA-30078E0AB97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProDom.MobileClient", "ProDom.MobileClient\ProDom.MobileClient.csproj", "{310A6993-9325-49CD-93AA-30078E0AB97E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProDom.ApiServer", "ProDom.ApiServer\ProDom.ApiServer.csproj", "{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProDom.ApiServer", "ProDom.ApiServer\ProDom.ApiServer.csproj", "{CE48AFDC-4EE8-42CD-812C-546B8D67DBCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

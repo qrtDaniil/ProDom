@@ -2,29 +2,26 @@
 
 namespace ProDom.ApiServer.Models
 {
-    public class PersonalAccount
+    public class PersonalAccount : BaseModel
     {
         public int Id { get; set; }
 
-        public List<User> Users { get; set; } = null!;
+        public List<User> Users { get; set; }
 
         [MaxLength(40)]
         public string AccountCode { get; set; }
 
+        public int Points { get; set; }
+
         public int AddressId { get; set; }
-        public Address Address { get; set; } = null!;
+        public Address Address { get; set; }
 
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public PersonalAccount(int id, string accountCode, int addressId, DateTime updatedAt, DateTime createdAt)
+        public PersonalAccount(int id, string accountCode, int points, int addressId)
         {
             Id = id;
             AccountCode = accountCode;
+            Points = points;
             AddressId = addressId;
-            UpdatedAt = DateTime.Now;
-            CreatedAt = DateTime.Now;
         }
     }
 }
