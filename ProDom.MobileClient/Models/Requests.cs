@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace ProDom.MobileClient.Models.Tables
+namespace ProDom.MobileClient.Models
 {
     public class Requests
     {

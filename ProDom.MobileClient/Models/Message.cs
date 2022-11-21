@@ -13,14 +13,13 @@ namespace ProDom.MobileClient.Models
         public string userName { get; set; } //from server
         public string imageResource { get; set; } //from server
         //MessageInfo
+        public int dialogId { get; set; } //from server
+        public int messageId { get; set; } //from server
         public string status { get; set; } //from server
         public string message { get; set; } //from server
         public DateTime sendedAt { get; set; } //from server
-        public string timeBeforelastMessage { get; set; } 
-        public bool notReadedLabelVisibility { get; set; } 
         public string messageFrom { get; set; } //from server
         public int notReadedCount { get; set; } //from server
-        public string statusImageResouce { get; set; }
 
     }
 }

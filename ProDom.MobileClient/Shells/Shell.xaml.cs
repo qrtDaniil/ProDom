@@ -1,5 +1,4 @@
-﻿using ProDom.MobileClient.Pages.HelpPages;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using ProDom.MobileClient.Services;
 
 namespace ProDom.MobileClient;
@@ -9,6 +8,7 @@ public partial class AppShell : Shell
 	Server server;
 	public AppShell()
 	{
+		Routing.RegisterRoute("chats/ChatForm", typeof(Chats.ChatFormPage));
 		InitializeComponent();
 
 		if (isAuthorized() || true) CurrentItem = session; 

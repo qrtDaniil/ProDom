@@ -18,7 +18,7 @@ namespace ProDom.MobileClient.Services
 
         public bool IsHasConnection()
         {
-            return false;
+            return true;
         }
     }
 }
