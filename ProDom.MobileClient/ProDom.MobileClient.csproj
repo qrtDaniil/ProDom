@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>ProDom.MobileClient</ApplicationTitle>
+		<ApplicationTitle>ProДом</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.prodom.mobileclient</ApplicationId>
@@ -49,11 +49,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\polls_hidepoll.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	  <PackageReference Include="SQLitePCLRaw.core" Version="2.1.2" />
 	  <PackageReference Include="System.Runtime" Version="4.3.1" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Session\OpenPollPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProDomMobileClientHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

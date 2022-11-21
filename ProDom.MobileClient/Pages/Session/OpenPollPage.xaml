@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProDom.MobileClient.Session.OpenPollPage"
+             Title="Детали опроса"
+             xmlns:viewmodels="clr-namespace:ProDom.MobileClient.ViewModels"
+             xmlns:models="clr-namespace:ProDom.MobileClient.Models.Visual"
+             Shell.TitleColor="White">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior
+            IconOverride="chat_header_backbutton.svg"/>
+    </Shell.BackButtonBehavior>
+    <ScrollView Margin="20">
+        <VerticalStackLayout
+        Margin="10,20,10,30">
+
+            <Label
+            Margin="20,0,0,0"
+            FontSize="12"
+            Text="Название"
+            TextColor="#6f6f6f"/>
+            <Frame
+            MaximumHeightRequest="300"
+            HorizontalOptions="Center"
+            Margin="0,2,0,0"
+            WidthRequest="300"
+            Background="#F1F1F1">
+                <Label
+                    MaximumWidthRequest="260"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    Margin="10,0,0,0"
+                    Padding="5"
+                    x:DataType="models:Poll"
+                    Text="{Binding Title}"/>
+            </Frame>
+
+            <Label
+                Margin="20,0,0,0"
+                FontSize="12"
+                Text="Описание"
+                TextColor="#6f6f6f"/>
+            <Frame
+                HorizontalOptions="Center"
+                Margin="0,10,0,0"
+                WidthRequest="300"
+                Background="#F1F1F1">
+                <ScrollView
+                    MaximumWidthRequest="260">
+                    <Label
+                        MaximumWidthRequest="260"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        Margin="10,0,0,0"
+                        x:DataType="models:Poll"
+                        Text="{Binding Description}"/>
+                </ScrollView>
+            </Frame>
+
+            <Grid
+                Margin="0,10"
+                ColumnDefinitions="1*,1*"
+                RowDefinitions="1*,1*">
+
+                <Button/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

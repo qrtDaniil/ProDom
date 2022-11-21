@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:ProDom.MobileClient.Welcome"
     xmlns:views="clr-namespace:ProDom.MobileClient.Session"
     xmlns:chats="clr-namespace:ProDom.MobileClient.Chats"
-    xmlns:help="clr-namespace:ProDom.MobileClient.Pages.HelpPages"
     FlyoutBehavior="Disabled">
 
     <ShellContent
@@ -17,6 +16,7 @@
 
     <!-- Session UI -->
 
+    
 
     <TabBar
         x:Name="session"
@@ -32,27 +32,34 @@
         <Tab
             Icon="tabbar_chats.png"
             Title="Чаты">
+            
+            <ShellContent
+                x:Name="ChatForm"
+                IsVisible="False"
+                ContentTemplate="{DataTemplate chats:ChatFormPage}"
+                Route="ChatForm"/>
+            
             <ShellContent
                 x:Name="tabChatsPrivate"
-                Title="Личные"
+                Title="Все чаты"
                 Icon="ChatsPage/chat"
                 ContentTemplate="{DataTemplate chats:ChatsPrivatePage}"
                 Route="private"/>
 
             <ShellContent
                 x:Name="tabChatEnterance"
-                Title="Подъезд"
+                Title="Чат подъезда"
                 Icon="enterance.png"
-                ContentTemplate="{DataTemplate chats:ChatsEnterancePage}"/>
+                ContentTemplate="{DataTemplate chats:ChatFormPage}"/>
 
             <ShellContent
                 x:Name="tabChatHouse"
-                Title="Дом"
+                Title="Чат дома"
                 Icon="Images/ChatsPage/house.svg"
-                ContentTemplate="{DataTemplate chats:ChatHousePage}"/>
+                ContentTemplate="{DataTemplate chats:ChatFormPage}"/>
 
         </Tab>
-
+        
 
         <ShellContent
                 x:Name="tabProfile"

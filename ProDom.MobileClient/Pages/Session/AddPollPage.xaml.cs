@@ -28,10 +28,10 @@ public partial class AddPollPage : ContentPage
     {
         
         var poll = new Models.Poll() {
-            name = pollName.Text,
-            dateStart = pollDateStart.Date,
-            timeConducting = TimeSpan.FromDays(pollTimeActive.SelectedIndex+6),
-            description = pollDescription.Text 
+            Title = pollName.Text,
+            DateStart = pollDateStart.Date,
+            TimeConducting = TimeSpan.FromDays(pollTimeActive.SelectedIndex+6),
+            Description = pollDescription.Text 
         };
 
         ServerSets server = new(Server);

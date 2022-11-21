@@ -2,11 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProDom.MobileClient.Chats.ChatsPrivatePage"
-             Shell.TabBarBackgroundColor="#ac88ec">
+             Shell.TabBarBackgroundColor="#ac88ec"
+             xmlns:viewmodels="clr-namespace:ProDom.MobileClient.ViewModels"
+             xmlns:models="clr-namespace:ProDom.MobileClient.Models.Visual"
+             x:DataType="viewmodels:PrivateChatsViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:PrivateChatsViewModel />
+    </ContentPage.BindingContext>
 
     <Shell.TitleView>
-        <HorizontalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <HorizontalStackLayout
+                Grid.Column="0"
+                BindingContext="viewmodels:PrivateChatsViewModel"
+                IsVisible="{Binding IsLoading}">
+                
+                <Label 
+                    Text="Обновление"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"
+                    Margin="15,0,0,0"/>
+
+
+            </HorizontalStackLayout>
+            
             <Label 
+                IsVisible="{Binding NotIsLoading}"
+                Grid.Column="0"
                 Text="Чаты"
                 TextColor="White"
                 FontSize="18"
@@ -16,12 +46,12 @@
                 />
             
             <ImageButton 
+                Grid.Column="1"
                 Source="button_new_message.svg"
                 WidthRequest="50"
                 HeightRequest="50"
-                Margin="150,0,0,0"
-                Clicked="ImageButton_Clicked"/>
-        </HorizontalStackLayout>
+                HorizontalOptions="Center"/>
+        </Grid>
 
     </Shell.TitleView>
 
@@ -29,7 +59,7 @@
 
         <VerticalStackLayout
             x:Name="layNoMessages"
-            IsVisible="true"
+            IsVisible="{Binding IsHasNotData}"
             VerticalOptions="Center"
             HorizontalOptions="Center">
             <Image
@@ -42,20 +72,25 @@
                 />
 
         </VerticalStackLayout>
-        <ListView
-            SeparatorVisibility="None"
+        <CollectionView
+            WidthRequest="400"
             Grid.Row="0"
             Grid.Column="0"
-            ItemsSource="{Binding usersWithMessages}"
-            HasUnevenRows ="True"
+            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PrivateChatsViewModel}}, Path=Chats}"
             x:Name="layMessages"
-            IsVisible="false"
+            IsVisible="true"
             ZIndex="1"
-            ItemSelected="layMessages_ItemSelected">
-
-            <ListView.ItemTemplate>
+            x:DataType="models:MessageInPrivateChats">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <Frame
+                        Style="{StaticResource CardView}"
+                        Background="#FFFFFF"
+                        BorderColor="White">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PrivateChatsViewModel}}, Path=OpenDialog}"
+                                                  CommandParameter="{Binding}"/>
+                        </Frame.GestureRecognizers>
                         <Grid
                             x:Name="grid"
                             Padding="20,10,20,10">
@@ -75,7 +110,7 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="7*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Border
@@ -84,12 +119,15 @@
                                 Stroke="#AAAAAA"
                                 StrokeThickness="1"
                                 Padding="0"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="60"
                                 WidthRequest="60">
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="100" />
                                 </Border.StrokeShape>
                                 <Image
-                                    Source="{Binding imageResource, TargetNullValue={StaticResource fallbackImageUrl}}"
+                                    Source="{Binding UserImageResource, TargetNullValue={StaticResource fallbackImageUrl}}"
                                     Aspect="Fill"
                                     WidthRequest="60"
                                     HeightRequest="60"/>
@@ -97,52 +135,63 @@
                             <Label
                                 Grid.Column="1"
                                 FontSize="16"
-                                TextColor="White"
-                                Text="{Binding userName}"/>
+                                TextColor="#222222"
+                                Text="{Binding Title}"/>
                             <Label
+                                FontAttributes="Italic"
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                TextColor="White"
+                                TextColor="#222222"
                                 FontSize="14"
                                 Margin="0,10,0,0"
-                                Text="{Binding lastMessage}"/>
-                            <Label
-                                Grid.Column="3"
-                                Grid.Row="0"
-                                TextColor="White"
-                                
-                                FontSize="10"
-                                HorizontalOptions="End"
-                                Text="{Binding timeBeforelastMessage}"/>
-                            <Image
-                                Grid.Column="4"
-                                Grid.Row="1"
-                                HorizontalOptions="End"
-                                Source="{Binding statusImageResouce, TargetNullValue={StaticResource fallbackImageUrl}}"
-                                Aspect="AspectFill"
-                                Margin="0,1,15,0"
-                                WidthRequest="18"
-                                HeightRequest="18"
-                                
-                                ZIndex="0"/>
-                            <Label
-                                Grid.Column="4"
-                                Grid.Row="1"
-                                TextColor="#000000"
-                                Padding="5,5,20,5"
-                                FontSize="12"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center"
-                                ZIndex="1"
-                                IsVisible="{Binding notReadedLabelVisibility}"
-                                Text="{Binding notReadedCount}"/>
-                            
+                                Text="{Binding LastMessageText}"/>
 
+                            <VerticalStackLayout
+                                Grid.Column="2"
+                                Grid.RowSpan="2">
+                                <Label
+                                    Margin="0,5,0,0"
+                                    Grid.Row="0"
+                                    TextColor="#222222"
+                                    FontSize="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding TimeBeforeLastMessage}"/>
+                                <Image
+                                        IsVisible="{Binding isHasNotNotReaded}"
+                                        Grid.Column="4"
+                                        Grid.Row="1"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding ImageStatusResource, TargetNullValue={StaticResource fallbackImageUrl}}"
+                                        Aspect="AspectFill"
+                                        Margin="0,15,0,0"
+                                        WidthRequest="20"
+                                        HeightRequest="20"
+                                
+                                        ZIndex="0"/>
+                                <Border BackgroundColor="#ac88ec"
+                                        Margin="0,15,0,0"
+                                        Padding="3"
+                                        IsVisible="{Binding isHasNotReaded}"
+                                        Stroke="#ac88ec">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+                                    <Label
+                                        Grid.Column="4"
+                                        Grid.Row="1"
+                                        TextColor="White"
+                                        FontSize="12"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        ZIndex="1"
+                                        Text="{Binding notReadedCount}"/>
+                                </Border>
+                            </VerticalStackLayout>
                         </Grid>
-                    </ViewCell>
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </CollectionView.ItemTemplate>
 
-        </ListView>
+        </CollectionView>
 	</Grid>
 </ContentPage>

@@ -2,11 +2,12 @@ namespace ProDom.MobileClient.Chats;
 
 public partial class ChatFormPage : ContentPage
 {
-	public ChatFormPage(int userId, bool isEnteranceChat, bool isHouseChat)
+	public ChatFormPage() 
 	{
 		InitializeComponent();
 
 	}
+
 
 	private async void backbutton_Clicked(object sender, EventArgs e)
 	{

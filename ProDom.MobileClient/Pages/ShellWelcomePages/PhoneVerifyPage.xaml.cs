@@ -7,10 +7,10 @@ public partial class PhoneVerifyPage : ContentPage
 
 	bool editing;
 	Models.RegisterProfile profile;
-    Models.Tables.Users res;
+    Models.User res;
 	Server server;
 
-	public PhoneVerifyPage(Models.RegisterProfile registerProfile = null, bool phoneEditing = false, Models.Tables.Users user = null, Server _server = null)
+	public PhoneVerifyPage(Models.RegisterProfile registerProfile = null, bool phoneEditing = false, Models.User user = null, Server _server = null)
 	{
 		server = _server;
 		res = user;
@@ -26,29 +26,44 @@ public partial class PhoneVerifyPage : ContentPage
 
 	private async void btnRegister_Clicked(object sender, EventArgs e)
 	{
-		Database.SmartYardDB db = new Database.SmartYardDB();
 		if (!editing)
 		{
-			Models.Tables.Users user = new Models.Tables.Users()
+			Models.RegisterProfile user = new Models.RegisterProfile()
 			{
 				Name = profile.Name,
 				Adress = profile.Adress,
 				Password = profile.Password,
-				Phone = profile.PhoneNumber,
+				PhoneNumber = profile.PhoneNumber,
 			};
 
 			ServerSets ser = new(server);
 			if (server.IsHasConnection())
 			{
-                await ser.SendCode(user);
+				string code = code1.Text + code2.Text + code3.Text + code4.Text;
+				if(code.Length == 4)
+				{
+					error.IsVisible = false;
+					string Response = await ser.SendCode(user, code);
+
+					if(Response == Constants.Server.STATUS_DENIED)
+					{
+                        error.IsVisible = true;
+                    } else
+					{
+						Preferences.Default.Set("API", Response);
+                        await Shell.Current.GoToAsync("//session/NewsPage");
+                    }
+
+                } else
+				{
+                    error.IsVisible = true;
+                }
+                
             }
 			
-			Preferences.Default.Set("isAuthorized", true);
-			await Shell.Current.GoToAsync("//session/NewsPage");
 		} else
 		{
-			//await db.UpdateUser(res);
-			//await Navigation.PopAsync();
+			await Navigation.PopAsync();
 		}
 	}
 }

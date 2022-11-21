@@ -4,7 +4,13 @@
              x:Class="ProDom.MobileClient.Chats.ChatFormPage"
              Title="ChatFormPage"
              Shell.TabBarIsVisible="False"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasBackButton="False"
+             xmlns:viewmodels="clr-namespace:ProDom.MobileClient.ViewModels"
+             xmlns:models="clr-namespace:ProDom.MobileClient.Models.Visual"
+             x:DataType="viewmodels:ChatFormViewModel">
+    <ContentPage.BindingContext>
+        <viewmodels:ChatFormViewModel/>
+    </ContentPage.BindingContext>
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior
@@ -14,20 +20,19 @@
     <Shell.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Label
-                Grid.Column="1"
-                Text="Name Surname"
+                Grid.Column="0"
+                Text="{Binding Dialog.Title}"
                 FontSize="20"
                 TextColor="White"
                 VerticalOptions="Center"/>
             
             <ImageButton
-                Grid.Column="2"
+                Grid.Column="1"
                 x:Name="settingsbutton"
                 Source="chat_header_settings.svg"
                 HorizontalOptions="End"
@@ -40,9 +45,75 @@
     </Shell.TitleView>
 
     <AbsoluteLayout>
-        <ScrollView>
-
-        </ScrollView>
+        <VerticalStackLayout
+                    AbsoluteLayout.LayoutBounds="0.5,0.5"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    x:Name="layNoMessages"
+                    IsVisible="{Binding IsHasNotData}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                <Image
+                    Margin="0,50,0,0"
+                    Source="dotnet_bot"/>
+                <Label 
+                    Text="Пока нет диалогов :("
+                    FontSize="20"/>
+            </VerticalStackLayout>
+            <!--No Messages-->
+        
+            <!--Show Message Container-->
+        <CollectionView 
+                Margin="10,10,10,30"
+                ItemsSource="{Binding Messages}"
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MessageInChat">
+                    <Grid
+                            MaximumWidthRequest="400"
+                            ColumnDefinitions="Auto,Auto"
+                            RowDefinitions="Auto">
+                        <ImageButton
+                                Margin="5"
+                                Grid.Column="{Binding GridColumnImage}"
+                                Aspect="AspectFill"
+                                WidthRequest="10"
+                                HeightRequest="10"
+                                VerticalOptions="End"
+                                Source="{Binding UserImage}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ChatFormViewModel}}, Path=ShowProfile}"
+                                CommandParameter="{Binding}"
+                                />
+                        <Frame
+                                Grid.Column="{Binding GridColumnMessage}"
+                                Padding="10"
+                                CornerRadius="10"
+                                BorderColor="{Binding Background}"
+                                BackgroundColor="{Binding Background}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                            <Grid
+                                    RowDefinitions="Auto,Auto">
+                                <Label
+                                        Grid.Row="0"
+                                        FontSize="12"
+                                        Text="{Binding Message}"
+                                        MaximumWidthRequest="360">
+                                </Label>
+                                <Label
+                                        HorizontalOptions="End"
+                                        Grid.Row="1"
+                                        FontSize="12"
+                                        Text="{Binding timeSended}"
+                                        MaximumWidthRequest="360">
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--SendMessage Container-->
         <Border
             ZIndex="999"
             AbsoluteLayout.LayoutBounds="0.5,0.94"
@@ -52,7 +123,7 @@
             Background="#F4F4F4">
 
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="20"/>
+                <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
 
             <Grid>
@@ -70,6 +141,8 @@
                     WidthRequest="260"
                     HorizontalOptions="Start"
                     Margin="10,0,0,0"
+                    MaxLength="750"
+                    Text="{Binding NewMessageText}"
                     x:Name="entryMsg"
                     Placeholder="Введите текст сообщения"/>
                 <ImageButton
@@ -77,6 +150,8 @@
                     WidthRequest="25"
                     HeightRequest="25"
                     VerticalOptions="Center"
+                    Command="{Binding SendMessage}"
+                    CommandParameter="{Binding Source={x:Reference entryMsg}, Path=Text}"
                     Source="chat_sendbutton.svg"
                     HorizontalOptions="Center"/>
             </Grid>

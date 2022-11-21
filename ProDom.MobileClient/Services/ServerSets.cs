@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProDom.MobileClient.Constants;
-using ProDom.MobileClient.Models.Tables;
+using ProDom.MobileClient.Models;
 
 namespace ProDom.MobileClient.Services
 {
@@ -24,7 +24,7 @@ namespace ProDom.MobileClient.Services
             return Constants.Server.REGISTER_STATUS_SUCCESS;
         }
 
-        public Task<string> SendCode(Users user)
+        public Task<string> SendCode(RegisterProfile user, string code)
         {
             return null;
         }
@@ -41,7 +41,10 @@ namespace ProDom.MobileClient.Services
             return Constants.Server.STATUS_SUCCESS;
         }
 
-
+        public async Task<string> SendMessage(int dialogID, string message)
+        {
+            return Constants.Server.STATUS_DENIED;
+        }
     }
 
     

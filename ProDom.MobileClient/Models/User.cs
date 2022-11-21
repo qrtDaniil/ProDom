@@ -22,8 +22,6 @@ namespace ProDom.MobileClient.Models
 
         public User()
         {
-
-
         }
     }
 }

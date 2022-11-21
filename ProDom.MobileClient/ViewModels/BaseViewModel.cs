@@ -8,7 +8,7 @@ namespace ProDom.MobileClient.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        Services.Server ser;
+        protected Services.Server ser;
         protected Services.ServerGets server;
 
         public BaseViewModel()
@@ -49,9 +49,16 @@ namespace ProDom.MobileClient.ViewModels
             get => _isHasNotConnection;
             set
             {
+                Shell.Current.DisplayAlert("Ошибка", "Отсутствует соединение, попробуйте, пожалуйста, позже", "OK");
                 _isHasNotConnection = value;
                 OnPropertyChanged();
             }
+        }
+
+        public bool NotIsLoading
+        {
+            get => !_isLoading;
+            set { _isLoading = !value; OnPropertyChanged(); }
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>

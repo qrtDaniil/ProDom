@@ -33,7 +33,14 @@ namespace ProDom.MobileClient.ViewModels
 
 
 
+
+/* Необъединенное слияние из проекта "ProDom.MobileClient (net6.0-ios)"
+До:
         public ObservableCollection<Models.Tables.Requests> Requests { get; } = new();
+После:
+        public ObservableCollection<Requests> Requests { get; } = new();
+*/
+        public ObservableCollection<Models.Requests> Requests { get; } = new();
 
         private async Task init()
         {
