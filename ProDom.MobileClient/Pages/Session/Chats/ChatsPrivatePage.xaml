@@ -76,13 +76,13 @@
             WidthRequest="400"
             Grid.Row="0"
             Grid.Column="0"
-            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PrivateChatsViewModel}}, Path=Chats}"
+            ItemsSource="{Binding Chats}"
             x:Name="layMessages"
             IsVisible="true"
-            ZIndex="1"
-            x:DataType="models:MessageInPrivateChats">
+            ZIndex="1">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate             
+                    x:DataType="models:MessageInPrivateChats">
                     <Frame
                         Style="{StaticResource CardView}"
                         Background="#FFFFFF"
@@ -165,12 +165,12 @@
                                         Aspect="AspectFill"
                                         Margin="0,15,0,0"
                                         WidthRequest="20"
-                                        HeightRequest="20"
+                                        HeightRequest="15"
                                 
                                         ZIndex="0"/>
                                 <Border BackgroundColor="#ac88ec"
                                         Margin="0,15,0,0"
-                                        Padding="3"
+                                        Padding="1"
                                         IsVisible="{Binding isHasNotReaded}"
                                         Stroke="#ac88ec">
                                     <Border.StrokeShape>
