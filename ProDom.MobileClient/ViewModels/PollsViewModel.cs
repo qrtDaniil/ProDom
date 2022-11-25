@@ -1,4 +1,5 @@
-﻿using ProDom.MobileClient.Services;
+﻿using Newtonsoft.Json;
+using ProDom.MobileClient.Services;
 using System.Collections.ObjectModel;
 
 namespace ProDom.MobileClient.ViewModels
@@ -13,6 +14,9 @@ namespace ProDom.MobileClient.ViewModels
         public Command SetPositiveVoice { get; set; }
         public Command SetNegativeVoice { get; set; }
         public Command HidePoll { get; set; }
+        public Command ChangeVoice { get; set; }
+        public Command Search { get; set; }
+        
 
         private ObservableCollection<Models.Visual.Poll> _polls = new();
 
@@ -28,6 +32,9 @@ namespace ProDom.MobileClient.ViewModels
 
         public PollsViewModel()
         {
+            Reload = new Command(async () => await getPolls());
+
+            Search = new Command<string>(async (name) => await SearchPollsByName(name));
 
             Init = getPolls();
             OpenAddPoll = new Command(async () => await Application.Current.MainPage.Navigation.PushAsync(new Pages.Session.AddPollPage()));
@@ -40,27 +47,72 @@ namespace ProDom.MobileClient.ViewModels
                     BindingContext = item as Models.Visual.Poll
                 });
             });
-            SetPositiveVoice = new Command<object>(async (item) =>
-            {
-                ServerSets set = new(ser);
-                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_ACCEPTED);
-                if (result != Constants.Server.STATUS_SUCCESS)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
-                    await getPolls();
-                }
-            });
+        }
 
-            SetNegativeVoice = new Command<object>(async (item) =>
+        private Task SearchPollsByName(string name)
+        {
+            IsLoading = true;
+            if (!server.IsHasConnection())
             {
-                ServerSets set = new(ser);
-                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_DENIED);
-                if (result != Constants.Server.STATUS_SUCCESS)
+                IsLoading = false;
+                IsHasNotConnection = false;
+            }
+            else
+            {
+                if (!server.IsHasPolls())
                 {
-                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
-                    await getPolls();
+                    IsHasNotData = true;
+                    IsLoading = false;
                 }
-            });
+                else
+                {
+                    IsHasNotData = false;
+
+                    var list = server.getPollsByTitle(name);
+                    _polls.Clear();
+                    foreach (var item in list)
+                    {
+                        var poll = new Models.Visual.Poll()
+                        {
+                            ID = item.ID,
+                            Title = item.Title,
+                            Description = item.Description,
+                            UserVoice = item.UserAnswer,
+                            TimeSpanClose = getTimeSpan(item.DateStart, item.TimeConducting),
+                            IsVisible = true,
+                            VoicedStatus = setVoicedStatus(item.UserAnswer),
+                            VoicedStatusColor = setVoicedStatusColor(item.UserAnswer),
+                            IsAnswered = item.UserAnswer != Constants.Server.POLLS_USERANSWER_NOTANSWERED,
+                            IsNotAnswered = item.UserAnswer == Constants.Server.POLLS_USERANSWER_NOTANSWERED,
+                            setPositiveVoice = new Command<object>(async (item) =>
+                            {
+                                ServerSets set = new(ser);
+                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_ACCEPTED);
+                                if (result != Constants.Server.STATUS_SUCCESS)
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
+                                    await getPolls();
+                                }
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                            }),
+                            setNegativeVoice = new Command<object>(async (item) =>
+                            {
+                                ServerSets set = new(ser);
+                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_DENIED);
+                                if (result != Constants.Server.STATUS_SUCCESS)
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
+                                    await getPolls();
+                                }
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                            })
+                        };
+                        _polls.Add(poll);
+                    }
+                    Polls = _polls;
+
+                }
+            }
         }
 
         private async Task getPolls()
@@ -95,9 +147,32 @@ namespace ProDom.MobileClient.ViewModels
                             TimeSpanClose = getTimeSpan(item.DateStart, item.TimeConducting),
                             IsVisible = true,
                             VoicedStatus = setVoicedStatus(item.UserAnswer),
-                            VoicedStatusColor = setVoicedStatusColor (item.UserAnswer)
-
-                        };
+                            VoicedStatusColor = setVoicedStatusColor (item.UserAnswer),
+                            IsAnswered = item.UserAnswer != Constants.Server.POLLS_USERANSWER_NOTANSWERED,
+                            IsNotAnswered = item.UserAnswer == Constants.Server.POLLS_USERANSWER_NOTANSWERED,
+                            setPositiveVoice = new Command<object>(async (item) =>
+                            {
+                                ServerSets set = new(ser);
+                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_ACCEPTED);
+                                if (result != Constants.Server.STATUS_SUCCESS)
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
+                                    await getPolls();
+                                }
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                            }),
+                            setNegativeVoice = new Command<object>(async (item) =>
+                            {
+                                ServerSets set = new(ser);
+                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_DENIED);
+                                if (result != Constants.Server.STATUS_SUCCESS)
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
+                                    await getPolls();
+                                }
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                            })
+                    };
                         _polls.Add(poll);
                     }
                     Polls = _polls;

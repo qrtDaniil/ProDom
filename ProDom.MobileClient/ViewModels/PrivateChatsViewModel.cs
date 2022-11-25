@@ -2,6 +2,7 @@
 using ProDom.MobileClient.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Timers;
 
@@ -47,12 +48,14 @@ namespace ProDom.MobileClient.ViewModels
         {
             try
             {
-                while (true)
+                //while (true)
                 {
                     IsLoading = true;
+                    NotIsLoading = false;
                     if (!server.IsHasConnection())
                     {
                         IsLoading = false;
+                        NotIsLoading = true;
                         IsHasNotConnection = true;
                     }
                     else
@@ -62,6 +65,7 @@ namespace ProDom.MobileClient.ViewModels
                         {
                             IsHasNotData = true;
                             IsLoading = false;
+                            NotIsLoading = true;
                         }
                         else
                         {
@@ -90,6 +94,7 @@ namespace ProDom.MobileClient.ViewModels
 
                             Chats = _chats;
                             IsLoading = false;
+                            NotIsLoading = true;
                             Console.WriteLine($"Chats length: {Chats.Count}");
                         }
                     }
@@ -103,35 +108,29 @@ namespace ProDom.MobileClient.ViewModels
 
 
 
-        System.Threading.Timer _timer;
 
         public PrivateChatsViewModel()
         {
-            OpenDialog = new Command<object>(async (object message) =>
+            OpenDialog = new Command<Models.Visual.MessageInPrivateChats>(async (Models.Visual.MessageInPrivateChats message) =>
             {
-                var msg = message as Models.Visual.MessageInPrivateChats;
-                Models.Dialog dialog = new Models.Dialog()
+                Models.Dialog Dialog = new()
                 {
-                    Title = msg.Title,
-                    DialogID = msg.DialogID,
+                    Title = message.Title,
+                    DialogID = message.DialogID,
                     Type = Constants.Server.DIALOG_TYPE_PRIVATE
                 };
-
-                Console.WriteLine(dialog.Title);
-
-                await Shell.Current.GoToAsync("chats/ChatForm", true, new Dictionary<string, object>
+                Debug.WriteLine($"Dialog sended: {Dialog.Title}", "PrivateChatsViewModel");
+                await Shell.Current.GoToAsync($"chats/ChatForm", true, new Dictionary<string, object>
                 {
-                    ["Dialog"] = dialog
+                    ["Dialog"] = Dialog
                 });
+
             });
 
             _cts = new CancellationTokenSource();
             Init = UploadMessages(_cts.Token);
-            _timer = new System.Threading.Timer(new TimerCallback(async (s) => await init()),
-                          null, TimeSpan.Zero, TimeSpan.FromMilliseconds(900));
         }
 
-        ~PrivateChatsViewModel() => _cts.Cancel();
 
         /*
 

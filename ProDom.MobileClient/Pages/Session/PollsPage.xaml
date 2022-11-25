@@ -85,69 +85,72 @@
                     Text="Пока нет диалогов :("
                     FontSize="20"/>
             </VerticalStackLayout>
+            <RefreshView
+                Command="{Binding Reload}">
+                <CollectionView
+                   Margin="10,0,10,30"
+                    ItemsSource="{Binding Polls}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Poll">
 
-            <CollectionView
-               Margin="10,0,10,30"
-                ItemsSource="{Binding Polls}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Poll">
+                            <Frame
+                                Margin="0,5"
+                                BackgroundColor="#F1F1F1"
+                                BorderColor="#F1F1F1"
+                                CornerRadius="20"
+                                Padding="10,10,10,5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PollsViewModel}}, Path=OpenPoll}"
+                                        CommandParameter="{Binding}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid
+                                    Padding="5"
+                                    ColumnDefinitions="5*,3*"
+                                    RowDefinitions="Auto,Auto,Auto">
+                                    <Label
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        TextColor="#545454"
+                                        Text="{Binding Title}"/>
+                                    <Label 
+                                        Margin="5"
+                                        FontSize="14"
+                                        Grid.Row="1"
+                                        Text="{Binding VoicedStatus}"
+                                        TextColor="{Binding VoicedStatusColor}"/>
+                                    <Label
+                                        Grid.Row="2"
+                                        TextColor="#737373"
+                                        Text="Подробнее"
+                                        FontSize="12"/>
 
-                        <Frame
-                            BackgroundColor="#F1F1F1"
-                            BorderColor="#F1F1F1"
-                            CornerRadius="20"
-                            Padding="10,10,10,5">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PollsViewModel}}, Path=OpenPoll}"
-                                    CommandParameter="{Binding}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid
-                                Padding="5"
-                                ColumnDefinitions="5*,3*"
-                                RowDefinitions="Auto,Auto,Auto">
-                                <Label
-                                    Margin="0,0,0,10"
-                                    FontSize="16"
-                                    TextColor="#545454"
-                                    Text="{Binding Title}"/>
-                                <Label 
-                                    Margin="5"
-                                    FontSize="14"
-                                    Grid.Row="1"
-                                    Text="{Binding VoicedStatus}"
-                                    TextColor="{Binding VoicedStatusColor}"/>
-                                <Label
-                                    Grid.Row="2"
-                                    TextColor="#737373"
-                                    Text="Подробнее"
-                                    FontSize="12"/>
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        TextColor="#737373"
+                                        Text="{Binding TimeSpanClose}"
+                                        FontSize="12"/>
 
-                                <Label
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    TextColor="#737373"
-                                    Text="{Binding TimeSpanClose}"
-                                    FontSize="12"/>
-
-                                <ImageButton
-                                    Grid.Column="1"
-                                    Source="polls_hidepoll.svg"
-                                    WidthRequest="15"
-                                    Aspect="AspectFill"
-                                    HeightRequest="15"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Start"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PollsViewModel}}, Path=HidePoll}"
-                                    CommandParameter="{Binding}"/>
-                            </Grid>
+                                    <ImageButton
+                                        Grid.Column="1"
+                                        Source="polls_hidepoll.svg"
+                                        WidthRequest="15"
+                                        Aspect="AspectFill"
+                                        HeightRequest="15"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PollsViewModel}}, Path=HidePoll}"
+                                        CommandParameter="{Binding}"/>
+                                </Grid>
                             
-                        </Frame>
+                            </Frame>
                         
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
 
 
         </Grid>

@@ -112,7 +112,7 @@
                 </Border.StrokeShape>
                 <Picker
                     x:Name="pollTimeActive"
-                    Margin="15,0,0,0"
+                    Margin="5,0,5,0"
                     Title="Выберите количество дней"/>
             </Border>
 

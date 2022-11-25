@@ -33,7 +33,7 @@ namespace ProDom.MobileClient.Services
 
         public async Task<string> SetPollVote(int pollId, string vote)
         {
-            return Constants.Server.STATUS_SUCCESS;
+            return Constants.Server.STATUS_DENIED;
         }
 
         public async Task<string> AddPoll(Models.Poll poll)
