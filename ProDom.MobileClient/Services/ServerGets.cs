@@ -48,6 +48,15 @@ namespace ProDom.MobileClient.Services
                     TimeConducting = new TimeSpan(5,0,0,0),
                     Status = Constants.Server.POLLS_STATUS_ACTIVE,
                     UserAnswer = Constants.Server.POLLS_USERANSWER_NOTANSWERED
+                },
+                new Models.Poll() {
+                    ID = 0,
+                    Title = "Очистка подъезда",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat placerat justo sit amet blandit. Proin malesuada neque at pellentesque convallis. Etiam facilisis augue pharetra, rhoncus sapien at, maximus nibh. Sed faucibus rutrum ultrices. Curabitur condimentum nunc in erat aliquet, sed dictum magna mollis. Nulla quis orci quis massa tristique venenatis. Cras urna ipsum, gravida quis pellentesque in, mattis nec diam.\r\n\r\nNunc ut metus a odio porttitor luctus. Nam mattis lobortis magna at euismod. Fusce non aliquet nibh. Vestibulum sed urna mattis, interdum magna sed, luctus felis. Mauris auctor tempor tortor, sit amet venenatis risus elementum a. Donec vitae consequat tellus. Vestibulum at mollis lectus. Praesent consequat commodo tellus, nec aliquet sapien venenatis non. Fusce hendrerit auctor ex, a convallis dolor eleifend quis. Donec pharetra lacus quis sapien semper ultricies. Suspendisse id enim sapien. Fusce tincidunt laoreet nulla in bibendum. Quisque tempus libero risus, non tincidunt nisl sodales vitae. Vestibulum pulvinar lacus pharetra erat pellentesque, non semper justo efficitur.\r\n\r\nPraesent aliquet, lorem non cursus efficitur, metus turpis rutrum enim, non hendrerit orci ipsum sit amet libero. Nunc venenatis velit at nisl viverra posuere. Duis vehicula, mi fringilla feugiat sodales, metus eros pulvinar ipsum, ac tincidunt ipsum eros at est. Morbi hendrerit massa vel suscipit imperdiet. Vivamus dapibus porttitor diam, et vestibulum sapien. Sed eu gravida elit. Pellentesque a elit ut nisi pellentesque pharetra vitae nec quam. Morbi in mauris consectetur, finibus sapien a, blandit orci. Duis tempus nibh ac lectus fermentum vestibulum. Cras venenatis finibus ipsum, sit amet ultrices sapien tempus posuere. In placerat, libero quis pellentesque blandit, est nibh hendrerit orci, eu interdum est lacus eu felis. Cras egestas purus quis urna dictum, eget egestas felis sagittis.",
+                    DateStart = DateTime.Now.AddDays(-3),
+                    TimeConducting = new TimeSpan(5,0,0,0),
+                    Status = Constants.Server.POLLS_STATUS_ACTIVE,
+                    UserAnswer = Constants.Server.POLLS_USERANSWER_ACCEPTED
                 }
             };
         }
@@ -86,15 +95,28 @@ namespace ProDom.MobileClient.Services
             {
                 new Models.Message()
                 {
-                    userName = "Даниил Филиппов",
+                    userName = "Пётр Петров",
                     imageResource = "user_no_image.png",
                     dialogId = 0,
                     messageId = 0,
                     status = Constants.Server.MESSAGE_STATUS_NOTREADED,
-                    message = "соси писю",
+                    message = "Вы во сколько приедете с работы?",
                     sendedAt = DateTime.Now,
                     messageFrom = Constants.Server.MESSAGE_FROM_ANOTHER,
                     notReadedCount = 3
+                },
+
+                new Models.Message()
+                {
+                    userName = "Иван Смирнов",
+                    imageResource = "user_no_image.png",
+                    dialogId = 0,
+                    messageId = 0,
+                    status = Constants.Server.MESSAGE_STATUS_SENDED,
+                    message = "Привет",
+                    sendedAt = DateTime.Now,
+                    messageFrom = Constants.Server.MESSAGE_FROM_CURRENT,
+                    notReadedCount = 0
                 }
             };
         }
@@ -140,6 +162,11 @@ namespace ProDom.MobileClient.Services
         public bool IsHasNewMessages()
         {
             return false;
+        }
+
+        internal object getPollsByTitle(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

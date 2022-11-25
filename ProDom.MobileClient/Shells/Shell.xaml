@@ -30,6 +30,7 @@
                 Route="NewsPage" />
 
         <Tab
+            Route="chats"
             Icon="tabbar_chats.png"
             Title="Чаты">
             

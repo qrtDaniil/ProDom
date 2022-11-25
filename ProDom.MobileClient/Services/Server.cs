@@ -1,24 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProDom.MobileClient.Services
+﻿namespace ProDom.MobileClient.Services
 {
     public class Server
     {
-        Server server;
+        HttpClient server = new();
+        bool isHasConnetion;
 
-
-        public Server()
+        public async Task<string> Init(string requestBody)
         {
-            //initialization
+            try
+            {
+                HttpResponseMessage response = await server.GetAsync(Constants.Server.SERVER_ADRESS + requestBody);
+                response.EnsureSuccessStatusCode();
+                isHasConnetion = true;
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                isHasConnetion = false;
+                return Constants.Server.STATUS_DENIED;
+            }
         }
+    
 
-        public bool IsHasConnection()
+        public async Task<bool> IsHasConnection()
         {
-            return true;
+            await Init(null);
+            return isHasConnetion;
         }
     }
 }

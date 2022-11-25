@@ -14,9 +14,15 @@ namespace ProDom.MobileClient.Models.Visual
         public string UserVoice { get; set; }
         public string TimeSpanClose { get; set; }
         public bool IsVisible { get; set; }
+        public bool IsAnswered { get; set; }
+        public bool IsNotAnswered { get; set; }
 
         public string VoicedStatus { get; set; }
         public Color VoicedStatusColor { get; set; }
+
+        public Command setPositiveVoice { get; set; }
+        public Command setNegativeVoice { get; set; }
+        public Command HidePoll { get; set; }
 
     }
 }
