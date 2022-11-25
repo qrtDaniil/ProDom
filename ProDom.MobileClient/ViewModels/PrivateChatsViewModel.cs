@@ -52,7 +52,7 @@ namespace ProDom.MobileClient.ViewModels
                 {
                     IsLoading = true;
                     NotIsLoading = false;
-                    if (!server.IsHasConnection())
+                    if (!await server.IsHasConnection())
                     {
                         IsLoading = false;
                         NotIsLoading = true;

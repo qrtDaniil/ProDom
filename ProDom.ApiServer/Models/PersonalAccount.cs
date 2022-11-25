@@ -6,7 +6,7 @@ namespace ProDom.ApiServer.Models
     {
         public int Id { get; set; }
 
-        public List<User> Users { get; set; } = null!;
+        public List<User>? Users { get; set; }
 
         [MaxLength(40)]
         public string AccountCode { get; set; }
@@ -16,15 +16,14 @@ namespace ProDom.ApiServer.Models
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
 
-        public PersonalAccount(int id, string accountCode, int addressId, DateTime updatedAt, DateTime createdAt)
+        public PersonalAccount(int id, string accountCode, int points, int addressId)
         {
             Id = id;
             AccountCode = accountCode;
             AddressId = addressId;
-            UpdatedAt = DateTime.Now;
-            CreatedAt = DateTime.Now;
         }
     }
 }

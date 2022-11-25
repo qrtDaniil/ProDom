@@ -15,35 +15,22 @@ public partial class RegisterPage : ContentPage
 
 	private async void btnRegister_Clicked(object sender, EventArgs e)
 	{
-        if (!checkFieldsIsFilledCorrectly()) return;
-        Models.RegisterProfile profile = new Models.RegisterProfile()
-		{
-			Name = name.Text,
-			Password = password.Text,
-			PhoneNumber = number.Text,
-			Adress = adress.Text,
-			Token = null
-		};
+		if (!checkFieldsIsFilledCorrectly()) return;
 
 		ServerSets ser = new(server);
-		if (server.IsHasConnection())
+		if (await server.IsHasConnection())
         {
             await DisplayAlert("Ошибка", "Нет соединения с сервером, попробуйте позже", "OK");
 			return;
         }
-		switch(await ser.SendRegisterProfile(profile))
-		{
-			case Constants.Server.REGISTER_STATUS_SUCCESS:
-				await Navigation.PushAsync(new PhoneVerifyPage(profile));
-				break;
-			case Constants.Server.REGISTER_STATUS_INCORRECT_IDENTIFICATOR:
-				await DisplayAlert("Ошибка", "Лицевой счет введен неверно", "OK");
-				break;
-            case Constants.Server.REGISTER_STATUS_PHONE_USED:
-                await DisplayAlert("Ошибка", "На этот телефон уже зарегистрирован аккаунт", "OK");
-                break;
-        }
-	}
+
+		await ser.RegisterUserAsync(
+				fullName: name.Text,
+				phoneNumber: number.Text,
+				password: password.Text
+			);
+
+    }
 
 	private bool checkFieldsIsFilledCorrectly()
 	{

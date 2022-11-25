@@ -18,7 +18,7 @@ public partial class AuthorizePage : ContentPage
 
 	private async void btnAuthorize_Clicked(object sender, EventArgs e)
 	{
-		if (server.IsHasConnection())
+		if (await server.IsHasConnection())
 		{
 			ServerGets ser = new(server);
 			string result = ser.GetAPI(number.Text, password.Text);

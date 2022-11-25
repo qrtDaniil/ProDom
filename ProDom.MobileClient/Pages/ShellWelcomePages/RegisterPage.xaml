@@ -100,27 +100,6 @@
                 <Label
                     Margin="45,10,0,0"
                     FontSize="12"
-                    Text="Адрес"
-                    TextColor="#6f6f6f"/>
-                <Border
-                    HorizontalOptions="Center"
-                    Margin="0,2,0,0"
-                    WidthRequest="250"
-                    Background="#F1F1F1">
-
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="20"/>
-                    </Border.StrokeShape>
-                    <Entry
-                        Keyboard="Default"
-                        Margin="10,0,0,0"
-                        x:Name="adress"
-                        Placeholder=""/>
-                </Border>
-
-                <Label
-                    Margin="45,10,0,0"
-                    FontSize="12"
                     Text="Пароль"
                     TextColor="#6f6f6f"/>
                 <Border
@@ -160,6 +139,27 @@
                         x:Name="passwordConfirm"
                         Placeholder="*********"/>
 
+                </Border>
+
+                <Label
+                    Margin="45,10,0,0"
+                    FontSize="12"
+                    Text="Лицевой счет"
+                    TextColor="#6f6f6f"/>
+                <Border
+                    HorizontalOptions="Center"
+                    Margin="0,2,0,0"
+                    WidthRequest="250"
+                    Background="#F1F1F1">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Entry
+                        Keyboard="Default"
+                        Margin="10,0,0,0"
+                        x:Name="adress"
+                        Placeholder=""/>
                 </Border>
 
                 <Button

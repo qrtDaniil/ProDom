@@ -1,12 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProDom.ApiServer.Models
 {
     public class Address
     {
         public int Id { get; set; }
-        public PersonalAccount PersonalAccount { get; set; } = null!;
+
+        public PersonalAccount? PersonalAccount { get; set; }
 
         [MaxLength(40)]
         public string? Index { get; set; }
@@ -24,10 +24,6 @@ namespace ProDom.ApiServer.Models
 
         public int Apartment { get; set; }
 
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
         public Address(int id, string? index, string? city, string? street, string house, int entrance, int apartment)
         {
             Id = id;
@@ -37,8 +33,6 @@ namespace ProDom.ApiServer.Models
             House = house;
             Entrance = entrance;
             Apartment = apartment;
-            UpdatedAt = DateTime.Now;
-            CreatedAt = DateTime.Now;
         }
     }
 }

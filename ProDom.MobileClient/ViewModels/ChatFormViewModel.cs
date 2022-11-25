@@ -77,12 +77,10 @@ namespace ProDom.MobileClient.ViewModels
 
         Task Init { get; set; }
 
-        public ChatFormViewModel()
+        async Task getChats()
         {
-            Debug.WriteLine($"dialog responsed: {Dialog.Title}", "ChatFormViewModel");
-            //init messages
             IsLoading = true;
-            if (!server.IsHasConnection())
+            if (!await server.IsHasConnection())
             {
                 IsLoading = false;
                 IsHasNotConnection = true;
@@ -131,6 +129,14 @@ namespace ProDom.MobileClient.ViewModels
                     Console.WriteLine($"Chats length: {_messages.Count}");
                 }
             }
+        }
+
+        public ChatFormViewModel()
+        {
+            Debug.WriteLine($"dialog responsed: {Dialog.Title}", "ChatFormViewModel");
+            //init messages
+            Task init = getChats();
+            
 
 
             SendMessage = new Command<string>(async (string message) => {
@@ -138,7 +144,7 @@ namespace ProDom.MobileClient.ViewModels
                 IsLoading = true;
                 Console.WriteLine($"message: {message}");
                 if (message == null) return;
-                if (!ser.IsHasConnection())
+                if (!await ser.IsHasConnection())
                 {
                     IsLoading = false;
                     IsHasNotConnection = true;

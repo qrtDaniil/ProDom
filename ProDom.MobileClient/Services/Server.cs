@@ -2,14 +2,14 @@
 {
     public class Server
     {
-        HttpClient server = new();
+        protected HttpClient server = new();
         bool isHasConnetion;
 
         public async Task<string> Init(string requestBody)
         {
             try
             {
-                HttpResponseMessage response = await server.GetAsync(Constants.Server.SERVER_ADRESS + requestBody);
+                HttpResponseMessage response = await server.GetAsync(Constants.Server.SERVER_ADRESS);
                 response.EnsureSuccessStatusCode();
                 isHasConnetion = true;
                 return await response.Content.ReadAsStringAsync();
@@ -20,6 +20,8 @@
                 return Constants.Server.STATUS_DENIED;
             }
         }
+
+
     
 
         public async Task<bool> IsHasConnection()

@@ -5,17 +5,19 @@ namespace ProDom.MobileClient.Session;
 
 public partial class NewsPage : ContentPage
 {
-	CurrentUser user;
 	public NewsPage()
 	{
 		InitializeComponent();
 	}
 
-	protected async override void OnAppearing()
+	User user;
+
+
+    protected async override void OnAppearing()
 	{
 		base.OnAppearing();
 		Services.Server ser = new();
-		if (ser.IsHasConnection())
+		if (await ser.IsHasConnection())
 		{
 			Services.ServerGets get = new(ser);
 			user = get.GetCurrentUserInfo();
@@ -23,7 +25,7 @@ public partial class NewsPage : ContentPage
 		if (user != null)
 		{
 			lbAdress.Text = user.Adress;
-			lbName.Text = $"{user.Name} {user.Surname}";
+			lbName.Text = user.Name;
 		} else
 		{
 			lbAdress.Text = "ул. Победы, д. 35";
