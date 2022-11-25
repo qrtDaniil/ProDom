@@ -1,31 +1,29 @@
-﻿namespace ProDom.ApiServer.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProDom.ApiServer.Models
 {
-    public class Appeal
+    public class Appeal : BaseModel
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; } = null!;
+        public int SenderId { get; set; }
+        public User Sender { get; set; }
 
+        [MaxLength(90)]
         public string Category { get; set; }
 
         public string Body { get; set; }
 
+        [MaxLength(20)]
         public string Status { get; set; }
 
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public Appeal(int id, int userId, string category, string body, string status, DateTime updatedAt, DateTime createdAt)
+        public Appeal(int id, int senderId, string category, string body, string status)
         {
             Id = id;
-            UserId = userId;
+            SenderId = senderId;
             Category = category;
             Body = body;
             Status = status;
-            UpdatedAt = updatedAt;
-            CreatedAt = createdAt;
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProDom.ApiServer.Models
 {
-    public class PersonalAccount
+    public class PersonalAccount : BaseModel
     {
         public int Id { get; set; }
 
@@ -11,10 +11,7 @@ namespace ProDom.ApiServer.Models
         [MaxLength(40)]
         public string AccountCode { get; set; }
 
-        public int AddressId { get; set; }
-        public Address Address { get; set; } = null!;
-
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public int Points { get; set; }
 
         public int AddressId { get; set; }
         public Address Address { get; set; }
@@ -23,6 +20,7 @@ namespace ProDom.ApiServer.Models
         {
             Id = id;
             AccountCode = accountCode;
+            Points = points;
             AddressId = addressId;
         }
     }

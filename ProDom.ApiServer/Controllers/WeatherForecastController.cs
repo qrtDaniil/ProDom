@@ -3,8 +3,8 @@ using ProDom.ApiServer.Models;
 
 namespace ProDom.ApiServer.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

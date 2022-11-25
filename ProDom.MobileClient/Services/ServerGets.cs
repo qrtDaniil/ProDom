@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using ProDom.MobileClient.Constants;
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace ProDom.MobileClient.Services
 
         // Polls //
 
-        public bool IsHasPolls()
+        public async Task<bool> IsHasPolls()
         {
             try
             {
@@ -46,6 +46,7 @@ namespace ProDom.MobileClient.Services
                 return false;
             }
 
+           
         }
 
         public async Task<List<Models.Poll>> getPolls()
