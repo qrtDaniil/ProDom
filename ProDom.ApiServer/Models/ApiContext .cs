@@ -16,8 +16,8 @@ namespace ProDom.ApiServer.Models
 
         public ApiContext(DbContextOptions<ApiContext> options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureDeleted(); // delete DB
+            Database.EnsureCreated(); // create DB if not exist
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
@@ -66,22 +66,20 @@ namespace ProDom.ApiServer.Models
             );
 
             modelBuilder.Entity<Poll>().HasData(
-                new Poll(-1, -9, "Установавливать ли видеокамеры, пожарные и газовые датчики", "УК предлагает установаить датчики видеокамеры во дворе и подъезде, а также датчики задымления и газовые датчики, с возможностью прямого доступа к ним через приложение умного дома."),
-                new Poll(-2, -9, "Выбор цвета покраски стен в подъездах", "Скоро у нас в доме по плану капитального ремонта будут красить стены в подъездах. Надо определится с цветом чтобы всем угодило.")
+                new Poll(-1, -9, "Установавливать ли видеокамеры, пожарные и газовые датчики", "УК предлагает установаить датчики видеокамеры во дворе и подъезде, а также датчики задымления и газовые датчики, с возможностью прямого доступа к ним через приложение умного дома.", 10),
+                new Poll(-2, -9, "Выбор цвета покраски стен в подъездах", "Скоро у нас в доме по плану капитального ремонта будут красить стены в подъездах. Надо определится с цветом чтобы всем угодило.", 5)
             );
 
             modelBuilder.Entity<PollOption>().HasData(
                 new PollOption(-1, -1, "Да", 0),
-                new PollOption(-2, -1, "Скорее да", 0),
-                new PollOption(-3, -1, "Скорее нет", 0),
-                new PollOption(-4, -1, "Нет", 0),
-                new PollOption(-5, -2, "Серый", 0),
-                new PollOption(-6, -2, "Синий", 0),
-                new PollOption(-7, -2, "Белый", 0),
-                new PollOption(-8, -2, "Пурпурный", 0),
-                new PollOption(-9, -2, "Красный", 0),
-                new PollOption(-10, -2, "Лучше по светлее", 0),
-                new PollOption(-11, -2, "Лучше по темнее", 0)
+                new PollOption(-2, -1, "Нет", 0),
+                new PollOption(-3, -2, "Серый", 0),
+                new PollOption(-4, -2, "Синий", 0),
+                new PollOption(-5, -2, "Белый", 0),
+                new PollOption(-6, -2, "Пурпурный", 0),
+                new PollOption(-7, -2, "Красный", 0),
+                new PollOption(-8, -2, "Лучше по светлее", 0),
+                new PollOption(-9, -2, "Лучше по темнее", 0)
             );
         }
 

@@ -6,8 +6,8 @@ namespace ProDom.ApiServer.Models
     {
         public int Id { get; set; }
 
-        public List<Poll> Polls { get; set; }
-        public List<Appeal> Appeals { get; set; }
+        public List<Poll>? Polls { get; set; }
+        public List<Appeal>? Appeals { get; set; }
 
         public int? PersonalAccountId { get; set; }
         public PersonalAccount? PersonalAccount { get; set; }
