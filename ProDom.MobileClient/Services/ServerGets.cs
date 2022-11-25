@@ -31,9 +31,10 @@ namespace ProDom.MobileClient.Services
 
         // Polls //
 
-        public bool IsHasPolls()
+        public async Task<bool> IsHasPolls()
         {
-            return true;
+            await Init("");
+
         }
 
         public List<Models.Poll> getPolls()
