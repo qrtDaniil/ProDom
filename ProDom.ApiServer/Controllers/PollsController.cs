@@ -19,14 +19,14 @@ namespace ProDom.ApiServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Poll>>> GetPoll()
         {
-            return await _context.Polls.ToListAsync();
+            return await _context.Polls.Include(x => x.PollsOptions).ToListAsync();
         }
 
         // GET: api/Polls/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Poll>> GetPoll(int id)
         {
-            var poll = await _context.Polls.FindAsync(id);
+            var poll = await _context.Polls.Where(x => x.Id == id).Include(x => x.PollsOptions).FirstOrDefaultAsync();
 
             if (poll == null)
             {

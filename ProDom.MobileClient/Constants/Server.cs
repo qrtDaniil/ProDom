@@ -8,6 +8,8 @@ namespace ProDom.MobileClient.Constants
 {
     public class Server
     {
+        public const string SERVER_ADRESS = "https://localhost:7192/";
+
         public const string UPDATING_HAS_NOT_NEW = "HAS_NOT_NEW";
 
         public const string REGISTER_STATUS_SUCCESS = "SUCCESS";

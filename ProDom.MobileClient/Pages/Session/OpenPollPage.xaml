@@ -7,6 +7,7 @@
              xmlns:models="clr-namespace:ProDom.MobileClient.Models.Visual"
              Shell.TitleColor="White">
 
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior
             IconOverride="chat_header_backbutton.svg"/>
@@ -21,11 +22,11 @@
             Text="Название"
             TextColor="#6f6f6f"/>
             <Frame
-            MaximumHeightRequest="300"
-            HorizontalOptions="Center"
-            Margin="0,2,0,0"
-            WidthRequest="300"
-            Background="#F1F1F1">
+                MaximumHeightRequest="300"
+                HorizontalOptions="Center"
+                Margin="0,2,0,0"
+                WidthRequest="300"
+                Background="#F1F1F1">
                 <Label
                     MaximumWidthRequest="260"
                     HorizontalOptions="Start"
@@ -58,12 +59,60 @@
                 </ScrollView>
             </Frame>
 
+
             <Grid
+                x:DataType="models:Poll"
+                IsVisible="{Binding IsNotAnswered}"
                 Margin="0,10"
                 ColumnDefinitions="1*,1*"
                 RowDefinitions="1*,1*">
 
-                <Button/>
+                <Button
+                    BackgroundColor="Green"
+                    Text="За"
+                    TextColor="White"
+                    Command="{Binding setPositiveVoice}"
+                    CommandParameter="{Binding}">
+                </Button>
+
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="Red"
+                    Text="Против"
+                    TextColor="White"
+                    Command="{Binding setNegativeVoice}"
+                    CommandParameter="{Binding}"/>
+                <Button
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="LightGray"
+                    Text="Скрыть опрос"
+                    TextColor="Black"
+                    CommandParameter="{Binding}"/>
+
+            </Grid>
+
+            <Grid
+                 x:DataType="models:Poll"
+                IsVisible="{Binding IsAnswered}"
+                Margin="0,10"
+                ColumnDefinitions="1*, 1*"
+                RowDefinitions="1*,5*">
+
+                <Label
+                    Grid.Column="0"
+                    FontSize="16"
+                    Text="Ваш ответ: "
+                    HorizontalOptions="End"
+                    TextColor="Black"/>
+
+                <Label
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Grid.Column="1"
+                    Text="{Binding VoicedStatus}"
+                    TextColor="{Binding VoicedStatusColor}"
+                    VerticalOptions="Start"/>
 
             </Grid>
         </VerticalStackLayout>

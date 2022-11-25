@@ -54,7 +54,7 @@ public partial class NewsPage : ContentPage
 
 	private async void chats_Clicked(object sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync("//chats/private");
+		await Shell.Current.GoToAsync("//session/chats/private");
 	}
 
 	private async void profile_Clicked(object sender, EventArgs e)

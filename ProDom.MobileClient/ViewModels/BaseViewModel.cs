@@ -20,6 +20,7 @@ namespace ProDom.MobileClient.ViewModels
         private bool _isHasNotData;
         private bool _isHasNotConnection;
         private bool _isLoading;
+        private bool _NotIsLoading;
 
         public Command Reload { get; set; }
 
@@ -57,8 +58,12 @@ namespace ProDom.MobileClient.ViewModels
 
         public bool NotIsLoading
         {
-            get => !_isLoading;
-            set { _isLoading = !value; OnPropertyChanged(); }
+            get => _NotIsLoading;
+            set 
+            {
+                _NotIsLoading = value;
+                OnPropertyChanged();
+            }
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>

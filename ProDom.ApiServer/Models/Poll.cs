@@ -16,12 +16,15 @@ namespace ProDom.ApiServer.Models
 
         public string Body { get; set; }
 
-        public Poll(int id, int creatorId, string title, string body)
+        public int Duration { get; set; }
+
+        public Poll(int id, int creatorId, string title, string body, int duration)
         {
             Id = id;
             CreatorId = creatorId;
             Title = title;
             Body = body;
+            Duration = duration;
         }
     }
 }

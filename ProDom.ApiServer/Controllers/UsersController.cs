@@ -19,14 +19,14 @@ namespace ProDom.ApiServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(x => x.PersonalAccount.Address).Include(y => y.Role).ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Where(x => x.Id == id).Include(x => x.PersonalAccount.Address).Include(y => y.Role).FirstOrDefaultAsync();
 
             if (user == null)
             {
