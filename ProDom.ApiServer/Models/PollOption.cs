@@ -7,7 +7,7 @@ namespace ProDom.ApiServer.Models
         public int Id { get; set; }
 
         public int PollId { get; set; }
-        public Poll Poll { get; set; }
+        public Poll? Poll { get; set; }
 
         [MaxLength(60)]
         public string Title { get; set; }

@@ -16,7 +16,7 @@ namespace ProDom.ApiServer.Models
 
         public ApiContext(DbContextOptions<ApiContext> options) : base(options)
         {
-            //Database.EnsureDeleted(); // delete DB
+            Database.EnsureDeleted(); // delete DB
             Database.EnsureCreated(); // create DB if not exist
         }
 
@@ -53,16 +53,16 @@ namespace ProDom.ApiServer.Models
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User(-1, -1, null, "Баранов Кирилл Владимирович", "9126236336", null, "testpassword"),
-                new User(-2, -2, null, "Чистяков Павел Русланович", "9126236336", null, "testpassword"),
-                new User(-3, -3, null, "Константинов Максим Григорьевич", "9126236336", null, "testpassword"),
-                new User(-4, -4, null, "Федоров Дмитрий Артёмович", "9126236336", null, "testpassword"),
-                new User(-5, -5, -2, "Тихонова Анна Кирилловна", "9126236336", null, "testpassword"),
-                new User(-6, -6, null, "Павлова Маргарита Данииловна", "9126236336", null, "testpassword"),
-                new User(-7, -7, null, "Власов Даниил Русланович", "9126236336", null, "testpassword"),
-                new User(-8, -8, null, "Костина Анастасия Николаевна", "9126236336", null, "testpassword"),
-                new User(-9, -1, -1, "Баранова Мария Алексеевна", "9126236336", null, "testpassword"),
-                new User(-10, -2, null, "Котов Ярослав Витальевич", "9126236336", null, "testpassword")
+                new User(-1, -1, null, "Баранов Кирилл Владимирович", "9126236311", null, "testpassword"),
+                new User(-2, -2, null, "Чистяков Павел Русланович", "9126236322", null, "testpassword"),
+                new User(-3, -3, null, "Константинов Максим Григорьевич", "9126236333", null, "testpassword"),
+                new User(-4, -4, null, "Федоров Дмитрий Артёмович", "9126236344", null, "testpassword"),
+                new User(-5, -5, -2, "Тихонова Анна Кирилловна", "9126236355", null, "testpassword"),
+                new User(-6, -6, null, "Павлова Маргарита Данииловна", "9126236366", null, "testpassword"),
+                new User(-7, -7, null, "Власов Даниил Русланович", "9126236377", null, "testpassword"),
+                new User(-8, -8, null, "Костина Анастасия Николаевна", "9126236388", null, "testpassword"),
+                new User(-9, -1, -1, "Баранова Мария Алексеевна", "9126236399", null, "testpassword"),
+                new User(-10, -2, null, "Котов Ярослав Витальевич", "9126236300", null, "testpassword")
             );
 
             modelBuilder.Entity<Poll>().HasData(

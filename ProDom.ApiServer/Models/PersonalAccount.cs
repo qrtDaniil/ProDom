@@ -6,7 +6,7 @@ namespace ProDom.ApiServer.Models
     {
         public int Id { get; set; }
 
-        public List<User> Users { get; set; }
+        public List<User>? Users { get; set; }
 
         [MaxLength(40)]
         public string AccountCode { get; set; }

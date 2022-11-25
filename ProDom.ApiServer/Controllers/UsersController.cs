@@ -36,6 +36,20 @@ namespace ProDom.ApiServer.Controllers
             return user;
         }
 
+        // GET: api/Users/auth/9126236336
+        [HttpGet("auth/{phoneNumber}")]
+        public async Task<ActionResult<User>> GetUserByPhone(string phoneNumber)
+        {
+            var user = await _context.Users.Where(x => x.PhoneNumber == phoneNumber).Include(x => x.PersonalAccount.Address).Include(y => y.Role).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

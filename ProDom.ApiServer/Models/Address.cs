@@ -6,7 +6,7 @@ namespace ProDom.ApiServer.Models
     {
         public int Id { get; set; }
 
-        public PersonalAccount PersonalAccount { get; set; }
+        public PersonalAccount? PersonalAccount { get; set; }
 
         [MaxLength(40)]
         public string? Index { get; set; }
@@ -23,10 +23,6 @@ namespace ProDom.ApiServer.Models
         public int Entrance { get; set; }
 
         public int Apartment { get; set; }
-
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Address(int id, string? index, string? city, string? street, string house, int entrance, int apartment)
         {

@@ -8,8 +8,8 @@ namespace ProDom.ApiServer.Models
 
         public List<PollOption> PollsOptions { get; set; }
 
-        public int CreatorId { get; set; }
-        public User Creator { get; set; }
+        public int? CreatorId { get; set; }
+        public User? Creator { get; set; }
 
         [MaxLength(60)]
         public string Title { get; set; }
@@ -18,7 +18,7 @@ namespace ProDom.ApiServer.Models
 
         public int Duration { get; set; }
 
-        public Poll(int id, int creatorId, string title, string body, int duration)
+        public Poll(int id, int? creatorId, string title, string body, int duration)
         {
             Id = id;
             CreatorId = creatorId;
