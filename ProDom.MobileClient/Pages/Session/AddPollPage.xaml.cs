@@ -26,19 +26,15 @@ public partial class AddPollPage : ContentPage
 
     private async void btnCreate_Clicked(object sender, EventArgs e)
     {
-        
-        var poll = new Models.Poll() {
-            Title = pollName.Text,
-            DateStart = pollDateStart.Date,
-            TimeConducting = TimeSpan.FromDays(pollTimeActive.SelectedIndex+6),
-            Description = pollDescription.Text 
-        };
-
         ServerSets server = new(Server);
 
-        if (Server.IsHasConnection())
+        if (await Server.IsHasConnection())
         {
-            await server.AddPoll(poll);
+            await server.CreatePollAsync(
+                title: pollName.Text,
+                body: pollDescription.Text,
+                duration: pollTimeActive.SelectedIndex + 5
+                );
         }
 
         await Navigation.PopAsync();

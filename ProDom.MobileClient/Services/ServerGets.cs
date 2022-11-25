@@ -1,4 +1,6 @@
-﻿using System;
+using Newtonsoft.Json;
+using ProDom.MobileClient.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +24,7 @@ namespace ProDom.MobileClient.Services
             return true;
         }
 
-        public Models.CurrentUser GetCurrentUserInfo()
+        public Models.User GetCurrentUserInfo()
         {
             string userAPI = Preferences.Default.Get("API", "0");
             if(userAPI == "0") return null;
@@ -33,33 +35,53 @@ namespace ProDom.MobileClient.Services
 
         public async Task<bool> IsHasPolls()
         {
-            await Init("");
+            try
+            {
+                HttpResponseMessage response = await server.GetAsync(Constants.Server.SERVER_ADRESS + "api/Polls");
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync() != null;
+            }
+            catch (HttpRequestException e)
+            {
+                return false;
+            }
 
+           
         }
 
-        public List<Models.Poll> getPolls()
+        public async Task<List<Models.Poll>> getPolls()
         {
-            return new List<Models.Poll>()
+            try
             {
-                new Models.Poll() {
-                    ID = 0,
-                    Title = "Очистка подъезда",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat placerat justo sit amet blandit. Proin malesuada neque at pellentesque convallis. Etiam facilisis augue pharetra, rhoncus sapien at, maximus nibh. Sed faucibus rutrum ultrices. Curabitur condimentum nunc in erat aliquet, sed dictum magna mollis. Nulla quis orci quis massa tristique venenatis. Cras urna ipsum, gravida quis pellentesque in, mattis nec diam.\r\n\r\nNunc ut metus a odio porttitor luctus. Nam mattis lobortis magna at euismod. Fusce non aliquet nibh. Vestibulum sed urna mattis, interdum magna sed, luctus felis. Mauris auctor tempor tortor, sit amet venenatis risus elementum a. Donec vitae consequat tellus. Vestibulum at mollis lectus. Praesent consequat commodo tellus, nec aliquet sapien venenatis non. Fusce hendrerit auctor ex, a convallis dolor eleifend quis. Donec pharetra lacus quis sapien semper ultricies. Suspendisse id enim sapien. Fusce tincidunt laoreet nulla in bibendum. Quisque tempus libero risus, non tincidunt nisl sodales vitae. Vestibulum pulvinar lacus pharetra erat pellentesque, non semper justo efficitur.\r\n\r\nPraesent aliquet, lorem non cursus efficitur, metus turpis rutrum enim, non hendrerit orci ipsum sit amet libero. Nunc venenatis velit at nisl viverra posuere. Duis vehicula, mi fringilla feugiat sodales, metus eros pulvinar ipsum, ac tincidunt ipsum eros at est. Morbi hendrerit massa vel suscipit imperdiet. Vivamus dapibus porttitor diam, et vestibulum sapien. Sed eu gravida elit. Pellentesque a elit ut nisi pellentesque pharetra vitae nec quam. Morbi in mauris consectetur, finibus sapien a, blandit orci. Duis tempus nibh ac lectus fermentum vestibulum. Cras venenatis finibus ipsum, sit amet ultrices sapien tempus posuere. In placerat, libero quis pellentesque blandit, est nibh hendrerit orci, eu interdum est lacus eu felis. Cras egestas purus quis urna dictum, eget egestas felis sagittis.",
-                    DateStart = DateTime.Now.AddDays(-3),
-                    TimeConducting = new TimeSpan(5,0,0,0),
-                    Status = Constants.Server.POLLS_STATUS_ACTIVE,
-                    UserAnswer = Constants.Server.POLLS_USERANSWER_NOTANSWERED
-                },
-                new Models.Poll() {
-                    ID = 0,
-                    Title = "Очистка подъезда",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat placerat justo sit amet blandit. Proin malesuada neque at pellentesque convallis. Etiam facilisis augue pharetra, rhoncus sapien at, maximus nibh. Sed faucibus rutrum ultrices. Curabitur condimentum nunc in erat aliquet, sed dictum magna mollis. Nulla quis orci quis massa tristique venenatis. Cras urna ipsum, gravida quis pellentesque in, mattis nec diam.\r\n\r\nNunc ut metus a odio porttitor luctus. Nam mattis lobortis magna at euismod. Fusce non aliquet nibh. Vestibulum sed urna mattis, interdum magna sed, luctus felis. Mauris auctor tempor tortor, sit amet venenatis risus elementum a. Donec vitae consequat tellus. Vestibulum at mollis lectus. Praesent consequat commodo tellus, nec aliquet sapien venenatis non. Fusce hendrerit auctor ex, a convallis dolor eleifend quis. Donec pharetra lacus quis sapien semper ultricies. Suspendisse id enim sapien. Fusce tincidunt laoreet nulla in bibendum. Quisque tempus libero risus, non tincidunt nisl sodales vitae. Vestibulum pulvinar lacus pharetra erat pellentesque, non semper justo efficitur.\r\n\r\nPraesent aliquet, lorem non cursus efficitur, metus turpis rutrum enim, non hendrerit orci ipsum sit amet libero. Nunc venenatis velit at nisl viverra posuere. Duis vehicula, mi fringilla feugiat sodales, metus eros pulvinar ipsum, ac tincidunt ipsum eros at est. Morbi hendrerit massa vel suscipit imperdiet. Vivamus dapibus porttitor diam, et vestibulum sapien. Sed eu gravida elit. Pellentesque a elit ut nisi pellentesque pharetra vitae nec quam. Morbi in mauris consectetur, finibus sapien a, blandit orci. Duis tempus nibh ac lectus fermentum vestibulum. Cras venenatis finibus ipsum, sit amet ultrices sapien tempus posuere. In placerat, libero quis pellentesque blandit, est nibh hendrerit orci, eu interdum est lacus eu felis. Cras egestas purus quis urna dictum, eget egestas felis sagittis.",
-                    DateStart = DateTime.Now.AddDays(-3),
-                    TimeConducting = new TimeSpan(5,0,0,0),
-                    Status = Constants.Server.POLLS_STATUS_ACTIVE,
-                    UserAnswer = Constants.Server.POLLS_USERANSWER_ACCEPTED
+                List<Models.Poll> polls = new();
+                var response1 = await server.GetAsync(Constants.Server.SERVER_ADRESS+"Polls/-1");
+                var response2 = await server.GetAsync(Constants.Server.SERVER_ADRESS+"Polls/-2");
+                response1.EnsureSuccessStatusCode(); // Чтобы в ответе был код статуса запроса
+
+                if (response1.IsSuccessStatusCode) // Если код статуса запроса успешный
+                {
+                    // Console.WriteLine(response.StatusCode.ToString());
+                    string message1 = await response1.Content.ReadAsStringAsync(); // Сам запрос
+                    string message2 = await response2.Content.ReadAsStringAsync();
+
+                    Models.Poll poll = JsonConvert.DeserializeObject<Models.Poll>(message1); // Заполнение модели
+                    polls.Add(poll);
+                    poll = JsonConvert.DeserializeObject<Models.Poll>(message2);
+                    polls.Add(poll);
+                    //Console.WriteLine(user.FullName); // Обращение к полю модели
+                    return polls;
                 }
-            };
+                else
+                {
+                    Console.WriteLine($"Respone error code: {response1.StatusCode}"); // Код статуса неудачного запроса
+                    return null;
+                }
+
+            }
+            catch (HttpRequestException e)
+            {
+                return null;
+            }
         }
 
         // Requests //

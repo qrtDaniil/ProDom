@@ -4,7 +4,7 @@ public partial class ProfilePage : ContentPage
 {
 	bool is_editing = false;
 
-	Models.CurrentUser user;
+	Models.User user;
 
     public ProfilePage()
 	{
@@ -15,14 +15,14 @@ public partial class ProfilePage : ContentPage
     {
         base.OnAppearing();
         Services.Server ser = new();
-        if (ser.IsHasConnection())
+        if (await ser.IsHasConnection())
         {
             Services.ServerGets get = new(ser);
             user = get.GetCurrentUserInfo();
         }
         if(user!= null)
         {
-            lbName.Text = $"{user.Name} {user.Surname}";
+            lbName.Text = user.Name;
             lbAdress.Text = user.Adress;
         }
         else

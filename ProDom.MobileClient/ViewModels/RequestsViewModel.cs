@@ -45,7 +45,7 @@ namespace ProDom.MobileClient.ViewModels
         private async Task init()
         {
             IsLoading = true;
-            if (!server.IsHasConnection())
+            if (! await server.IsHasConnection())
             {
                 IsLoading = false;
                 IsHasNotConnection = true;

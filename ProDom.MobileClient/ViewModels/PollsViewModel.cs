@@ -34,7 +34,7 @@ namespace ProDom.MobileClient.ViewModels
         {
             Reload = new Command(async () => await getPolls());
 
-            Search = new Command<string>(async (name) => await SearchPollsByName(name));
+            //Search = new Command<string>(async (name) => await SearchPollsByName(name));
 
             Init = getPolls();
             OpenAddPoll = new Command(async () => await Application.Current.MainPage.Navigation.PushAsync(new Pages.Session.AddPollPage()));
@@ -49,83 +49,19 @@ namespace ProDom.MobileClient.ViewModels
             });
         }
 
-        private Task SearchPollsByName(string name)
-        {
-            IsLoading = true;
-            if (!server.IsHasConnection())
-            {
-                IsLoading = false;
-                IsHasNotConnection = false;
-            }
-            else
-            {
-                if (!server.IsHasPolls())
-                {
-                    IsHasNotData = true;
-                    IsLoading = false;
-                }
-                else
-                {
-                    IsHasNotData = false;
-
-                    var list = server.getPollsByTitle(name);
-                    _polls.Clear();
-                    foreach (var item in list)
-                    {
-                        var poll = new Models.Visual.Poll()
-                        {
-                            ID = item.ID,
-                            Title = item.Title,
-                            Description = item.Description,
-                            UserVoice = item.UserAnswer,
-                            TimeSpanClose = getTimeSpan(item.DateStart, item.TimeConducting),
-                            IsVisible = true,
-                            VoicedStatus = setVoicedStatus(item.UserAnswer),
-                            VoicedStatusColor = setVoicedStatusColor(item.UserAnswer),
-                            IsAnswered = item.UserAnswer != Constants.Server.POLLS_USERANSWER_NOTANSWERED,
-                            IsNotAnswered = item.UserAnswer == Constants.Server.POLLS_USERANSWER_NOTANSWERED,
-                            setPositiveVoice = new Command<object>(async (item) =>
-                            {
-                                ServerSets set = new(ser);
-                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_ACCEPTED);
-                                if (result != Constants.Server.STATUS_SUCCESS)
-                                {
-                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
-                                    await getPolls();
-                                }
-                                await Application.Current.MainPage.Navigation.PopAsync();
-                            }),
-                            setNegativeVoice = new Command<object>(async (item) =>
-                            {
-                                ServerSets set = new(ser);
-                                string result = await set.SetPollVote((item as Models.Visual.Poll).ID, Constants.Server.POLLS_USERANSWER_DENIED);
-                                if (result != Constants.Server.STATUS_SUCCESS)
-                                {
-                                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось добавить Ваш ответ, попробуйте позже!", "ОК");
-                                    await getPolls();
-                                }
-                                await Application.Current.MainPage.Navigation.PopAsync();
-                            })
-                        };
-                        _polls.Add(poll);
-                    }
-                    Polls = _polls;
-
-                }
-            }
-        }
+        
 
         private async Task getPolls()
         {
             IsLoading = true;
-            if (!server.IsHasConnection())
+            if (!await server.IsHasConnection())
             {
                 IsLoading = false;
                 IsHasNotConnection = false;
             } 
             else 
             {
-                if (!server.IsHasPolls())
+                if (!await server.IsHasPolls())
                 {
                     IsHasNotData = true;
                     IsLoading = false;
@@ -134,22 +70,16 @@ namespace ProDom.MobileClient.ViewModels
                 {
                     IsHasNotData = false;
 
-                    var list = server.getPolls();
+                    var list =await server.getPolls();
                     _polls.Clear();
                     foreach (var item in list)
                     {
                         var poll = new Models.Visual.Poll()
                         {
-                            ID = item.ID,
+                            ID = item.Id,
                             Title = item.Title,
-                            Description = item.Description,
-                            UserVoice = item.UserAnswer,
-                            TimeSpanClose = getTimeSpan(item.DateStart, item.TimeConducting),
+                            Description = item.Body,
                             IsVisible = true,
-                            VoicedStatus = setVoicedStatus(item.UserAnswer),
-                            VoicedStatusColor = setVoicedStatusColor (item.UserAnswer),
-                            IsAnswered = item.UserAnswer != Constants.Server.POLLS_USERANSWER_NOTANSWERED,
-                            IsNotAnswered = item.UserAnswer == Constants.Server.POLLS_USERANSWER_NOTANSWERED,
                             setPositiveVoice = new Command<object>(async (item) =>
                             {
                                 ServerSets set = new(ser);

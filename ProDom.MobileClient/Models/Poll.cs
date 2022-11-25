@@ -4,15 +4,14 @@ namespace ProDom.MobileClient.Models
 {
     public class Poll
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
+
+        public int CreatorId { get; set; }
+        public User Creator { get; set; }
+
         public string Title { get; set; }
-        public string Description { get; set; }
 
-        public DateTime DateStart { get; set; }
-        public TimeSpan TimeConducting { get; set; }
-
-        public string Status { get; set; }
-        public string UserAnswer { get; set; }
+        public string Body { get; set; }
 
     }
 }

@@ -30,14 +30,14 @@ public partial class PhoneVerifyPage : ContentPage
 		{
 			Models.RegisterProfile user = new Models.RegisterProfile()
 			{
-				Name = profile.Name,
+				FullName = profile.FullName,
 				Adress = profile.Adress,
 				Password = profile.Password,
 				PhoneNumber = profile.PhoneNumber,
 			};
 
 			ServerSets ser = new(server);
-			if (server.IsHasConnection())
+			if (await server.IsHasConnection())
 			{
 				string code = code1.Text + code2.Text + code3.Text + code4.Text;
 				if(code.Length == 4)
